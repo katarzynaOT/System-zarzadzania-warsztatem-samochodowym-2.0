@@ -1,0 +1,6 @@
+﻿@page
+@model WorkshopManager.Pages.PanelModel
+@using Microsoft.AspNetCore.Authorization
+@attribute [Authorize]
+<h2>Twój panel</h2>
+<p>Witaj, @User.Identity.Name!</p>

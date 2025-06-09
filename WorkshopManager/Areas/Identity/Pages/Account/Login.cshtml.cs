@@ -1,15 +1,16 @@
 ﻿using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
+using WorkshopManager.Models;
 using System.ComponentModel.DataAnnotations;
 
 namespace WorkshopManager.Areas.Identity.Pages.Account
 {
     public class LoginModel : PageModel
     {
-        private readonly SignInManager<IdentityUser> _signInManager;
+        private readonly SignInManager<ApplicationUser> _signInManager;
 
-        public LoginModel(SignInManager<IdentityUser> signInManager)
+        public LoginModel(SignInManager<ApplicationUser> signInManager)
         {
             _signInManager = signInManager;
         }
@@ -47,9 +48,14 @@ namespace WorkshopManager.Areas.Identity.Pages.Account
                 if (result.Succeeded)
                 {
                     Console.WriteLine(" Zalogowano użytkownika: " + Input.Email);
-                    return LocalRedirect(returnUrl?? "~/Panel");
+                    return LocalRedirect(returnUrl);
                 }
-                ModelState.AddModelError(string.Empty, "Nieprawidłowe dane logowania.");
+                if (result.IsLockedOut)
+                {
+                    ModelState.AddModelError(string.Empty, "Nieprawidłowe dane logowania.");
+                    return Page();
+                }
+                ModelState.AddModelError(string.Empty, "Nieprawidłowy login lub hasło.");
             }
             return Page();
         }

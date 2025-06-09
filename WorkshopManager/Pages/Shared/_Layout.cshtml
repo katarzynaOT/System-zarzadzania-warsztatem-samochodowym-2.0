@@ -1,4 +1,5 @@
-﻿<!DOCTYPE html>
+﻿@using WorkshopManager.Models
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="utf-8" />
@@ -46,7 +47,23 @@
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
     <script src="~/js/site.js" asp-append-version="true"></script>
+    <ul>
+    @if (User.Identity.IsAuthenticated)
+    {
+        <li><a asp-area="Identity" asp-page="/Account/Manage/Index">Mój profil</a></li>
+        <li>
+                      <form method="post" asp-area="Identity" asp-page="/Account/Logout">
+                <button class="btn btn-link">Wyloguj</button>
+            </form>
+        </li>
+    }
+    else
+    {
 
+      <li><a asp-area="Identity" asp-page="/Account/Login">Logowanie</a></li>
+      <li><a asp-area="Identity" asp-page="/Account/Register">Rejestracja</a></li>
+    }
+</ul>
     @await RenderSectionAsync("Scripts", required: false)
 </body>
 </html>
