@@ -1,0 +1,181 @@
+{
+  "Version": 1,
+  "WorkspaceRootPath": "C:\\Users\\Katarzyna\\Desktop\\PR\\PR\\",
+  "Documents": [
+    {
+      "AbsoluteMoniker": "D:0:0:{6F58F8A4-4561-49BF-B517-A8461BEC70E8}|WorkshopManager\\WorkshopManager.csproj|c:\\users\\katarzyna\\desktop\\pr\\pr\\workshopmanager\\views\\panel\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{6F58F8A4-4561-49BF-B517-A8461BEC70E8}|WorkshopManager\\WorkshopManager.csproj|solutionrelative:workshopmanager\\views\\panel\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{6F58F8A4-4561-49BF-B517-A8461BEC70E8}|WorkshopManager\\WorkshopManager.csproj|c:\\users\\katarzyna\\desktop\\pr\\pr\\workshopmanager\\controllers\\panelcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{6F58F8A4-4561-49BF-B517-A8461BEC70E8}|WorkshopManager\\WorkshopManager.csproj|solutionrelative:workshopmanager\\controllers\\panelcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{6F58F8A4-4561-49BF-B517-A8461BEC70E8}|WorkshopManager\\WorkshopManager.csproj|c:\\users\\katarzyna\\desktop\\pr\\pr\\workshopmanager\\views\\panel\\manageusers.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{6F58F8A4-4561-49BF-B517-A8461BEC70E8}|WorkshopManager\\WorkshopManager.csproj|solutionrelative:workshopmanager\\views\\panel\\manageusers.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{6F58F8A4-4561-49BF-B517-A8461BEC70E8}|WorkshopManager\\WorkshopManager.csproj|c:\\users\\katarzyna\\desktop\\pr\\pr\\workshopmanager\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{6F58F8A4-4561-49BF-B517-A8461BEC70E8}|WorkshopManager\\WorkshopManager.csproj|solutionrelative:workshopmanager\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{6F58F8A4-4561-49BF-B517-A8461BEC70E8}|WorkshopManager\\WorkshopManager.csproj|c:\\users\\katarzyna\\desktop\\pr\\pr\\workshopmanager\\pages\\shared\\_loginpartial.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{6F58F8A4-4561-49BF-B517-A8461BEC70E8}|WorkshopManager\\WorkshopManager.csproj|solutionrelative:workshopmanager\\pages\\shared\\_loginpartial.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{6F58F8A4-4561-49BF-B517-A8461BEC70E8}|WorkshopManager\\WorkshopManager.csproj|c:\\users\\katarzyna\\desktop\\pr\\pr\\workshopmanager\\areas\\identity\\pages\\account\\register.cshtml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{6F58F8A4-4561-49BF-B517-A8461BEC70E8}|WorkshopManager\\WorkshopManager.csproj|solutionrelative:workshopmanager\\areas\\identity\\pages\\account\\register.cshtml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{6F58F8A4-4561-49BF-B517-A8461BEC70E8}|WorkshopManager\\WorkshopManager.csproj|c:\\users\\katarzyna\\desktop\\pr\\pr\\workshopmanager\\appsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}",
+      "RelativeMoniker": "D:0:0:{6F58F8A4-4561-49BF-B517-A8461BEC70E8}|WorkshopManager\\WorkshopManager.csproj|solutionrelative:workshopmanager\\appsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{6F58F8A4-4561-49BF-B517-A8461BEC70E8}|WorkshopManager\\WorkshopManager.csproj|c:\\users\\katarzyna\\desktop\\pr\\pr\\workshopmanager\\models\\user.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{6F58F8A4-4561-49BF-B517-A8461BEC70E8}|WorkshopManager\\WorkshopManager.csproj|solutionrelative:workshopmanager\\models\\user.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{6F58F8A4-4561-49BF-B517-A8461BEC70E8}|WorkshopManager\\WorkshopManager.csproj|c:\\users\\katarzyna\\desktop\\pr\\pr\\workshopmanager\\workshopmanager.csproj||{FA3CD31E-987B-443A-9B81-186104E8DAC1}|",
+      "RelativeMoniker": "D:0:0:{6F58F8A4-4561-49BF-B517-A8461BEC70E8}|WorkshopManager\\WorkshopManager.csproj|solutionrelative:workshopmanager\\workshopmanager.csproj||{FA3CD31E-987B-443A-9B81-186104E8DAC1}|"
+    }
+  ],
+  "DocumentGroupContainers": [
+    {
+      "Orientation": 0,
+      "VerticalTabListWidth": 256,
+      "DocumentGroups": [
+        {
+          "DockedWidth": 200,
+          "SelectedChildIndex": 3,
+          "Children": [
+            {
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{34e76e81-ee4a-11d0-ae2e-00a0c90fffc3}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{d78612c7-9962-4b83-95d9-268046dad23a}"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "ManageUsers.cshtml",
+              "DocumentMoniker": "C:\\Users\\Katarzyna\\Desktop\\PR\\PR\\WorkshopManager\\Views\\Panel\\ManageUsers.cshtml",
+              "RelativeDocumentMoniker": "WorkshopManager\\Views\\Panel\\ManageUsers.cshtml",
+              "ToolTip": "C:\\Users\\Katarzyna\\Desktop\\PR\\PR\\WorkshopManager\\Views\\Panel\\ManageUsers.cshtml",
+              "RelativeToolTip": "WorkshopManager\\Views\\Panel\\ManageUsers.cshtml",
+              "ViewState": "AgIAABgAAAAAAAAAAAAAACUAAAAMAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2025-06-10T14:15:27.572Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "Index.cshtml",
+              "DocumentMoniker": "C:\\Users\\Katarzyna\\Desktop\\PR\\PR\\WorkshopManager\\Views\\Panel\\Index.cshtml",
+              "RelativeDocumentMoniker": "WorkshopManager\\Views\\Panel\\Index.cshtml",
+              "ToolTip": "C:\\Users\\Katarzyna\\Desktop\\PR\\PR\\WorkshopManager\\Views\\Panel\\Index.cshtml*",
+              "RelativeToolTip": "WorkshopManager\\Views\\Panel\\Index.cshtml*",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAoAAAAyAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2025-06-10T13:55:20.656Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 5,
+              "Title": "Register.cshtml.cs",
+              "DocumentMoniker": "C:\\Users\\Katarzyna\\Desktop\\PR\\PR\\WorkshopManager\\Areas\\Identity\\Pages\\Account\\Register.cshtml.cs",
+              "RelativeDocumentMoniker": "WorkshopManager\\Areas\\Identity\\Pages\\Account\\Register.cshtml.cs",
+              "ToolTip": "C:\\Users\\Katarzyna\\Desktop\\PR\\PR\\WorkshopManager\\Areas\\Identity\\Pages\\Account\\Register.cshtml.cs",
+              "RelativeToolTip": "WorkshopManager\\Areas\\Identity\\Pages\\Account\\Register.cshtml.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAACkAAAA0AAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-06-10T13:35:36.288Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 7,
+              "Title": "User.cs",
+              "DocumentMoniker": "C:\\Users\\Katarzyna\\Desktop\\PR\\PR\\WorkshopManager\\Models\\User.cs",
+              "RelativeDocumentMoniker": "WorkshopManager\\Models\\User.cs",
+              "ToolTip": "C:\\Users\\Katarzyna\\Desktop\\PR\\PR\\WorkshopManager\\Models\\User.cs",
+              "RelativeToolTip": "WorkshopManager\\Models\\User.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAqwAQAAAARAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-06-10T13:30:39.026Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 4,
+              "Title": "_LoginPartial.cshtml",
+              "DocumentMoniker": "C:\\Users\\Katarzyna\\Desktop\\PR\\PR\\WorkshopManager\\Pages\\Shared\\_LoginPartial.cshtml",
+              "RelativeDocumentMoniker": "WorkshopManager\\Pages\\Shared\\_LoginPartial.cshtml",
+              "ToolTip": "C:\\Users\\Katarzyna\\Desktop\\PR\\PR\\WorkshopManager\\Pages\\Shared\\_LoginPartial.cshtml",
+              "RelativeToolTip": "WorkshopManager\\Pages\\Shared\\_LoginPartial.cshtml",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAoAAAArAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2025-06-10T13:20:42.647Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "PanelController.cs",
+              "DocumentMoniker": "C:\\Users\\Katarzyna\\Desktop\\PR\\PR\\WorkshopManager\\Controllers\\PanelController.cs",
+              "RelativeDocumentMoniker": "WorkshopManager\\Controllers\\PanelController.cs",
+              "ToolTip": "C:\\Users\\Katarzyna\\Desktop\\PR\\PR\\WorkshopManager\\Controllers\\PanelController.cs",
+              "RelativeToolTip": "WorkshopManager\\Controllers\\PanelController.cs",
+              "ViewState": "AgIAACAAAAAAAAAAAAAwwDgAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-06-10T13:20:12.064Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "Program.cs",
+              "DocumentMoniker": "C:\\Users\\Katarzyna\\Desktop\\PR\\PR\\WorkshopManager\\Program.cs",
+              "RelativeDocumentMoniker": "WorkshopManager\\Program.cs",
+              "ToolTip": "C:\\Users\\Katarzyna\\Desktop\\PR\\PR\\WorkshopManager\\Program.cs",
+              "RelativeToolTip": "WorkshopManager\\Program.cs",
+              "ViewState": "AgIAAC0AAAAAAAAAAAAkwEkAAAAgAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-06-09T15:35:01.368Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 8,
+              "Title": "WorkshopManager.csproj",
+              "DocumentMoniker": "C:\\Users\\Katarzyna\\Desktop\\PR\\PR\\WorkshopManager\\WorkshopManager.csproj",
+              "RelativeDocumentMoniker": "WorkshopManager\\WorkshopManager.csproj",
+              "ToolTip": "C:\\Users\\Katarzyna\\Desktop\\PR\\PR\\WorkshopManager\\WorkshopManager.csproj",
+              "RelativeToolTip": "WorkshopManager\\WorkshopManager.csproj",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAYAAABJAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000758|",
+              "WhenOpened": "2025-06-09T18:06:26.692Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 6,
+              "Title": "appsettings.json",
+              "DocumentMoniker": "C:\\Users\\Katarzyna\\Desktop\\PR\\PR\\WorkshopManager\\appsettings.json",
+              "RelativeDocumentMoniker": "WorkshopManager\\appsettings.json",
+              "ToolTip": "C:\\Users\\Katarzyna\\Desktop\\PR\\PR\\WorkshopManager\\appsettings.json",
+              "RelativeToolTip": "WorkshopManager\\appsettings.json",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAQAAAAEAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001642|",
+              "WhenOpened": "2025-06-09T15:38:44.677Z",
+              "EditorCaption": ""
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
