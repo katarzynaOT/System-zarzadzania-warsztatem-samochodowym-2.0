@@ -1,0 +1,25 @@
+﻿@model IEnumerable<WorkshopManager.Models.Comment>
+@{
+    ViewData["Title"] = "Komentarze";
+}
+
+<h1>Komentarze</h1>
+
+<ul>
+    @foreach (var comment in Model)
+    {
+        <li>
+            <strong>@comment.AuthorId</strong> - @comment.CreatedAt.ToLocalTime().ToString("g")
+            <p>@comment.Content</p>
+        </li>
+    }
+</ul>
+
+@if (User.Identity.IsAuthenticated)
+{
+    <a class="btn btn-primary" href="@Url.Action("Create", "Comments")">Dodaj komentarz</a>
+}
+else
+{
+    <p>Tylko zalogowani użytkownicy mogą komentować.</p>
+}

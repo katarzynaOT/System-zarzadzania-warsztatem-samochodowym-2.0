@@ -1,0 +1,15 @@
+﻿@model WorkshopManager.Models.Car
+
+<h2>Szczegóły pojazdu</h2>
+<p><b>Nazwa:</b> @Model.Name</p>
+<p><b>Opis:</b> @Model.Description</p>
+
+@if (!string.IsNullOrEmpty(Model.imageUrl))
+{
+    <img src="@Model.imageUrl" alt="Zdjęcie pojazdu" style="max-width:300px; border-radius:10px;" />
+}
+else
+{
+    <span class="text-muted">Brak zdjęcia</span>
+}
+
