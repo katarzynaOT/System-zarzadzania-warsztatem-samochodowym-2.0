@@ -1,0 +1,33 @@
+﻿@page
+@model WorkshopManager.Areas.Identity.Pages.Account.LoginModel
+@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
+@{
+    ViewData["Title"] = "Logowanie";
+}
+
+<h1>@ViewData["Title"]</h1>
+
+<form method="post">
+    @Html.AntiForgeryToken()
+    <div asp-validation-summary="All" class="text-danger"></div>
+    <div class="form-group">
+        <label for="Input_Email">Adres e-mail</label>
+        <input asp-for="Input.Email" class="form-control" />
+        <span asp-validation-for="Input.Email" class="text-danger" />
+    </div>
+
+    <div class="form-group">
+        <label for="Input_Password">Hasło</label>
+        <input asp-for="Input.Password" class="form-control" type="password" />
+        <span asp-validation-for="Input.Password" class="text-danger" />
+    </div>
+
+    //<input type="checkbox" id="Input_RememberMe" name="Input.RememberMe" value="true" />
+
+    <button type="submit" class="btn btn-primary">Zaloguj</button>
+</form>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}
+
