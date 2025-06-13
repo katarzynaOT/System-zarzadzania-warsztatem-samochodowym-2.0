@@ -530,3 +530,4 @@ C:\Users\Katarzyna\Desktop\p_net\WorkshopManager\obj\Debug\net8.0\refint\Worksho
 C:\Users\Katarzyna\Desktop\p_net\WorkshopManager\obj\Debug\net8.0\WorkshopManager.pdb
 C:\Users\Katarzyna\Desktop\p_net\WorkshopManager\obj\Debug\net8.0\WorkshopManager.genruntimeconfig.cache
 C:\Users\Katarzyna\Desktop\p_net\WorkshopManager\obj\Debug\net8.0\ref\WorkshopManager.dll
+C:\Users\Katarzyna\Desktop\p_net\WorkshopManager\obj\Debug\net8.0\WorkshopManager.sourcelink.json

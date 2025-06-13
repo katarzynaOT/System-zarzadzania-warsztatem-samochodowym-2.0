@@ -8,5 +8,5 @@
 @if (User.IsInRole("Admin"))
 {
     <h3>Panel administracyjny</h3>
-    <a class="btn btn-primary" controller="Panel" action="ManageUsers">Zarządzanie użytkownikami</a>
+    <a asp-controller="Panel" asp-action="ManageUsers" class="btn btn-primary">Zarządzanie użytkownikami</a>
 }

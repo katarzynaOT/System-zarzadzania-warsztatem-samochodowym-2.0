@@ -2,17 +2,18 @@
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using WorkshopManager.Models;
+using WorkshopManager.Services;
 
 namespace WorkshopManager.Controllers
 {
     [Authorize]
     public class PanelController : Controller
     {
-        private readonly UserManager<ApplicationUser> _userManager;
+        private readonly IUserService _userService;
 
-        public PanelController(UserManager<ApplicationUser> userManager)
+        public PanelController(IUserService userService)
         {
-            _userManager = userManager;
+            _userService = userService;
         }
 
         [Authorize(Roles = "Admin")]
@@ -24,45 +25,23 @@ namespace WorkshopManager.Controllers
         [Authorize(Roles = "Admin")]
         public async Task<IActionResult> ManageUsers()
         {
-            Console.WriteLine("Uruchomiono ManageUsers!");
-            var users = _userManager.Users.ToList();
-            var userRoles = new Dictionary<string, IList<string>>();
+            var users = await _userService.GetAllUsersAsync();
+            var roles = await _userService.GetUserRolesAsync(users);
 
-            foreach (var user in users)
-            {
-                userRoles[user.Id] = await _userManager.GetRolesAsync(user);
-            }
-
-            ViewBag.UserRoles = userRoles;
+            ViewBag.UserRoles = roles;
             return View(users);
         }
 
         [Authorize(Roles = "Admin")]
         [HttpPost]
-        public async Task<IActionResult> ChangeUserRole([FromForm] string userId, [FromForm] string newRole)
+        public async Task<IActionResult> ChangeUserRole(string userId, string newRole)
         {
-            if (string.IsNullOrEmpty(userId) || string.IsNullOrEmpty(newRole))
+            if (await _userService.ChangeUserRoleAsync(userId, newRole))
             {
-                return BadRequest("UserId i NewRole są wymagane.");
+                return RedirectToAction("ManageUsers");
             }
-
-            var user = await _userManager.FindByIdAsync(userId);
-            if (user != null)
-            {           
-                var currentRoles = await _userManager.GetRolesAsync(user);
-                if (currentRoles.Any())
-                {
-                    await _userManager.RemoveFromRolesAsync(user, currentRoles);
-                }
-
-                var result = await _userManager.AddToRoleAsync(user, newRole);
-                if (!result.Succeeded)
-                {
-                    return BadRequest("Nie udało się przypisać roli.");
-                }
-                return RedirectToAction("ManageUsers"); 
-            }
-            return NotFound("Użytkownik nie został znaleziony.");
+            return BadRequest("Zmiana roli się nie powiodła.");
         }
     }
+
 }
