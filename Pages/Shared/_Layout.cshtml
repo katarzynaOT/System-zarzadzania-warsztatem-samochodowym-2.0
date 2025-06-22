@@ -1,4 +1,7 @@
 ﻿@using WorkshopManager.Models
+@inject SignInManager<ApplicationUser> SignInManager
+@inject UserManager<ApplicationUser> UserManager
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -30,22 +33,45 @@
                             <a class="nav-link text-dark" asp-area=""  asp-page="/Panel">Name</a>
                         </li>
 
-                        @if (User.Identity.IsAuthenticated)
+@if (SignInManager.IsSignedIn(User))
                         {
-                            <li class="nav-item">
-                                <a class="nav-link text-dark" asp-area="" asp-controller="Customers" asp-action="Index">Customers</a>
+                            @if (User.Identity.IsAuthenticated && User.IsInRole("Recepcjonista"))
+                            {
+                                <li class="nav-item">
+                                    <a class="nav-link text-dark" asp-area="" asp-controller="Customers" asp-action="Index">Customers</a>
                                 </li>
-                            <li class="nav-item">
-                                <a class="nav-link text-dark" asp-area="" asp-controller="Cars" asp-action="Index">Cars</a>
+                                <li class="nav-item">
+                                    <a class="nav-link text-dark" asp-area="" asp-controller="Cars" asp-action="Index">Cars</a>
                                 </li>
-                            <li class="nav-item">
-                                <a class="nav-link text-dark" asp-area="" asp-controller="Comments" asp-action="Index">Comments</a>
+                                <li class="nav-item">
+                                    <a class="nav-link text-dark" asp-area="" asp-controller="ServiceOrders" asp-action="Index">Orders</a>
                                 </li>
-                            <li class="nav-item">
-                                <form method="post" asp-area="Identity" asp-page="/Account/Logout">
-                                    <button class="btn btn-link">Wyloguj</button>
-                                </form>
-                            </li>
+                                <li class="nav-item">
+                                    <a class="nav-link text-dark" asp-area="" asp-controller="Parts" asp-action="Index">Parts</a>
+                                </li>
+                            }
+                           @if (User.Identity.IsAuthenticated && User.IsInRole("Admin"))
+                            {
+                                <li class="nav-item">
+                                    <a class="nav-link text-dark" asp-area="" asp-controller="ServiceOrders" asp-action="Index">Orders</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link text-dark" asp-area="" asp-controller="Parts" asp-action="Index">Parts</a>
+                                </li>
+                            }
+                            @if (User.Identity.IsAuthenticated && User.IsInRole("Mechanik"))
+                            {
+                                <li class="nav-item">
+                                    <a class="nav-link text-dark" asp-area="" asp-controller="ServiceOrders" asp-action="Index">Orders</a>
+                                </li>
+
+                                <li class="nav-item">
+                                    <a class="nav-link text-dark" asp-area="" asp-controller="Comments" asp-action="Index">Comments</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link text-dark" asp-area="" asp-controller="ServiceTasks" asp-action="Index">Tasks</a>
+                                </li>
+                            }
                         }
                     </ul>
                     <partial name="_LoginPartial" />

@@ -1,32 +1,33 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Runtime.ConstrainedExecution;
+using System.Threading.Tasks;
 using WorkshopManager.Data;
 using WorkshopManager.Models;
 
 namespace WorkshopManager.Controllers
 {
-    public class CommentsController : Controller
+    public class ServiceTasksController : Controller
     {
         private readonly ApplicationDbContext _context;
 
-        public CommentsController(ApplicationDbContext context)
+        public ServiceTasksController(ApplicationDbContext context)
         {
             _context = context;
         }
 
-        // GET: Comments
+        // GET: ServiceTasks
         public async Task<IActionResult> Index()
         {
-            var applicationDbContext = _context.Comments.Include(c => c.Order);
+            var applicationDbContext = _context.ServiceTasks.Include(s => s.Order);
             return View(await applicationDbContext.ToListAsync());
         }
 
-        // GET: Comments/Details/5
+        // GET: ServiceTasks/Details/5
         public async Task<IActionResult> Details(int? id)
         {
             if (id == null)
@@ -34,18 +35,28 @@ namespace WorkshopManager.Controllers
                 return NotFound();
             }
 
-            var comment = await _context.Comments
-                .Include(c => c.Order)
+            var serviceTask = await _context.ServiceTasks
+                .Include(s => s.Order)
                 .FirstOrDefaultAsync(m => m.Id == id);
-            if (comment == null)
+            if (serviceTask == null)
             {
                 return NotFound();
             }
 
-            return View(comment);
+            var viewModel = new TaskIndexData();
+            viewModel.Task = serviceTask;
+            viewModel.TaskParts = await _context.UsedParts.Where(i => i.ServiceTaskId == serviceTask.Id).ToListAsync();
+
+            foreach (var taskPart in viewModel.TaskParts)
+            {
+                taskPart.Part = await _context.Parts.Where(i => i.Id == taskPart.PartId).SingleAsync();
+                //System.Diagnostics.Debug.WriteLine("Found part:" + taskPart.Part.Name);
+            }
+
+            return View(viewModel);
         }
 
-        // GET: Comments/Create
+        // GET: ServiceTasks/Create
         public IActionResult Create(int? serviceorder_id)
         {
             if (serviceorder_id != null)
@@ -64,27 +75,26 @@ namespace WorkshopManager.Controllers
                 ViewData["OrderId"] = new SelectList(_context.ServiceOrders, "Id", "Id");
                 return View();
             }
-
         }
 
-        // POST: Comments/Create
+        // POST: ServiceTasks/Create
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,OrderId,CreatedDate,Content,Author,AuthorId")] Comment comment)
+        public async Task<IActionResult> Create([Bind("Id,OrderId,Description,Title,LaborCost")] ServiceTask serviceTask)
         {
             //if (ModelState.IsValid)
             //{
-                _context.Add(comment);
+                _context.Add(serviceTask);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             //}
-            ViewData["OrderId"] = new SelectList(_context.ServiceOrders, "Id", "Id", comment.OrderId);
-            return View(comment);
+            ViewData["OrderId"] = new SelectList(_context.ServiceOrders, "Id", "Id", serviceTask.OrderId);
+            return View(serviceTask);
         }
 
-        // GET: Comments/Edit/5
+        // GET: ServiceTasks/Edit/5
         public async Task<IActionResult> Edit(int? id)
         {
             if (id == null)
@@ -92,37 +102,37 @@ namespace WorkshopManager.Controllers
                 return NotFound();
             }
 
-            var comment = await _context.Comments.FindAsync(id);
-            if (comment == null)
+            var serviceTask = await _context.ServiceTasks.FindAsync(id);
+            if (serviceTask == null)
             {
                 return NotFound();
             }
-            ViewData["OrderId"] = new SelectList(_context.ServiceOrders, "Id", "Id", comment.OrderId);
-            return View(comment);
+            ViewData["OrderId"] = new SelectList(_context.ServiceOrders, "Id", "Id", serviceTask.OrderId);
+            return View(serviceTask);
         }
 
-        // POST: Comments/Edit/5
+        // POST: ServiceTasks/Edit/5
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,OrderId,CreatedDate,Content,Author,AuthorId")] Comment comment)
+        public async Task<IActionResult> Edit(int id, [Bind("Id,OrderId,Description,Title,LaborCost")] ServiceTask serviceTask)
         {
-            if (id != comment.Id)
+            if (id != serviceTask.Id)
             {
                 return NotFound();
             }
 
-            //if (ModelState.IsValid)
-            //{
+            if (ModelState.IsValid)
+            {
                 try
                 {
-                    _context.Update(comment);
+                    _context.Update(serviceTask);
                     await _context.SaveChangesAsync();
                 }
                 catch (DbUpdateConcurrencyException)
                 {
-                    if (!CommentExists(comment.Id))
+                    if (!ServiceTaskExists(serviceTask.Id))
                     {
                         return NotFound();
                     }
@@ -132,12 +142,12 @@ namespace WorkshopManager.Controllers
                     }
                 }
                 return RedirectToAction(nameof(Index));
-            //}
-            ViewData["OrderId"] = new SelectList(_context.ServiceOrders, "Id", "Id", comment.OrderId);
-            return View(comment);
+            }
+            ViewData["OrderId"] = new SelectList(_context.ServiceOrders, "Id", "Id", serviceTask.OrderId);
+            return View(serviceTask);
         }
 
-        // GET: Comments/Delete/5
+        // GET: ServiceTasks/Delete/5
         public async Task<IActionResult> Delete(int? id)
         {
             if (id == null)
@@ -145,35 +155,35 @@ namespace WorkshopManager.Controllers
                 return NotFound();
             }
 
-            var comment = await _context.Comments
-                .Include(c => c.Order)
+            var serviceTask = await _context.ServiceTasks
+                .Include(s => s.Order)
                 .FirstOrDefaultAsync(m => m.Id == id);
-            if (comment == null)
+            if (serviceTask == null)
             {
                 return NotFound();
             }
 
-            return View(comment);
+            return View(serviceTask);
         }
 
-        // POST: Comments/Delete/5
+        // POST: ServiceTasks/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
-            var comment = await _context.Comments.FindAsync(id);
-            if (comment != null)
+            var serviceTask = await _context.ServiceTasks.FindAsync(id);
+            if (serviceTask != null)
             {
-                _context.Comments.Remove(comment);
+                _context.ServiceTasks.Remove(serviceTask);
             }
 
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
 
-        private bool CommentExists(int id)
+        private bool ServiceTaskExists(int id)
         {
-            return _context.Comments.Any(e => e.Id == id);
+            return _context.ServiceTasks.Any(e => e.Id == id);
         }
     }
 }

@@ -18,6 +18,33 @@
     <None Remove="Views\NewFolder\**" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Compile Remove="Program_original.cs" />
+    <Compile Remove="Views\Error.cshtml.cs" />
+    <Compile Remove="Views\Index.cshtml.cs" />
+    <Compile Remove="Views\Login.cshtml.cs" />
+    <Compile Remove="Views\Logout.cshtml.cs" />
+    <Compile Remove="Views\Panel.cshtml.cs" />
+    <Compile Remove="Views\Privacy.cshtml.cs" />
+    <Compile Remove="Views\Register.cshtml.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Remove="Views\Error.cshtml" />
+    <Content Remove="Views\Index.cshtml" />
+    <Content Remove="Views\Login.cshtml" />
+    <Content Remove="Views\Logout.cshtml" />
+    <Content Remove="Views\Panel.cshtml" />
+    <Content Remove="Views\Privacy.cshtml" />
+    <Content Remove="Views\Register.cshtml" />
+    <Content Remove="Views\ServiceOrders\Index - original.cshtml" />
+    <Content Remove="Views\Shared\_Layout.cshtml" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Remove="Views\Shared\_Layout.cshtml.css" />
+  </ItemGroup>
+
 	<ItemGroup>
 		<PackageReference Include="Microsoft.AspNetCore.Diagnostics.EntityFrameworkCore" Version="8.0.11" />
 		<PackageReference Include="Microsoft.EntityFrameworkCore" Version="8.0.11" />

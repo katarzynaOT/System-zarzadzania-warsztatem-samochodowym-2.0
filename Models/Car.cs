@@ -16,5 +16,7 @@
         public int ManufacturedYear { get; set; }
 
         public string? imageUrl { get; set; }
+
+        public ICollection<ServiceOrder> Orders { get; } = new List<ServiceOrder>();
     }
 }

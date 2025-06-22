@@ -1,4 +1,7 @@
 ﻿@model WorkshopManager.Models.Comment
+@inject SignInManager<ApplicationUser> SignInManager
+@inject UserManager<ApplicationUser> UserManager
+
 
 @{
     ViewData["Title"] = "Create";
@@ -13,6 +16,10 @@
         <form asp-action="Create">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <div class="form-group">
+                <label asp-for="OrderId" class="control-label"></label>
+                <select asp-for="OrderId" class ="form-control" asp-items="ViewBag.OrderId"></select>
+            </div>
+            <div class="form-group">
                 <label asp-for="CreatedDate" class="control-label"></label>
                 <input asp-for="CreatedDate" class="form-control" />
                 <span asp-validation-for="CreatedDate" class="text-danger"></span>
@@ -24,12 +31,12 @@
             </div>
             <div class="form-group">
                 <label asp-for="Author" class="control-label"></label>
-                <input asp-for="Author" class="form-control" />
+                <input asp-for="Author" class="form-control" value="@User.Identity.Name" />
                 <span asp-validation-for="Author" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <label asp-for="AuthorId" class="control-label"></label>
-                <input asp-for="AuthorId" class="form-control" />
+                <input asp-for="AuthorId" class="form-control" value="@UserManager.GetUserId(User)"></>
                 <span asp-validation-for="AuthorId" class="text-danger"></span>
             </div>
             <div class="form-group">

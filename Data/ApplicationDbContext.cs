@@ -11,17 +11,20 @@ namespace WorkshopManager.Data
         
         public DbSet<Customer> Customers { get; set; }
         public DbSet<Car> Cars { get; set; }
-        public DbSet<Order> ServiceOrders { get; set; }
+        public DbSet<ServiceOrder> ServiceOrders { get; set; }
 
      
         protected override void OnModelCreating(ModelBuilder builder)
         {
             base.OnModelCreating(builder);
 
-            builder.Entity<Order>()
+            builder.Entity<ServiceOrder>()
                    .Property(o => o.Price)
                    .HasPrecision(18, 4);
         }
         public DbSet<WorkshopManager.Models.Comment> Comments { get; set; } = default!;
+        public DbSet<WorkshopManager.Models.ServiceTask> ServiceTasks { get; set; } = default!;
+        public DbSet<WorkshopManager.Models.UsedPart> UsedParts { get; set; } = default!;
+        public DbSet<WorkshopManager.Models.Part> Parts { get; set; } = default!;
     }
 }

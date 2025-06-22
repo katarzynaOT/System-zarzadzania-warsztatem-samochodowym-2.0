@@ -82,11 +82,12 @@
 {
     <table class="table">
         <tr>
-            <th></th>
+            
             <th>Name</th>
             <th>Brand</th>
             <th>Model</th>
             <th>Registration Plate</th>
+            <th>Actions</th>
         </tr>
 
         @foreach (var item in Model.Cars)
@@ -94,12 +95,9 @@
             string selectedRow = "";
             if (item.Id == (int?)ViewData["CarID"])
             {
-                selectedRow = "success";
+                selectedRow = "table-success";
             }
             <tr class="@selectedRow">
-                <td>
-                    @Html.ActionLink("Select", "Index", new { CarID = item.Id})
-                </td>
                 <td>
                     @item.Name
                 </td>
@@ -112,9 +110,58 @@
                 <td>
                     @item.RegistrationPlate
                 </td>
+                <td>
+                    <a asp-action="Index" asp-route-carId="@item.Id">Select</a> | 
+                    <a asp-controller="Cars" asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
+                    <a asp-controller="Cars" asp-action="Details" asp-route-id="@item.Id">Details</a> |
+                    <a asp-controller="Cars" asp-action="Delete" asp-route-id="@item.Id">Delete</a>
+                </td>
 
             </tr>
         }
 
     </table>
 }
+
+@if (Model.selectedCar != null)
+{
+    <a asp-controller="ServiceOrders" asp-action="Create" asp-route-car_id="@Model.selectedCar.Id">Create New Order</a>   
+
+
+@if (Model.SelectedCarOrders != null)
+{
+    <table class="table">
+        <tr>
+            
+            <th>Order Status</th>
+            <th>Assigned Mechanic</th>
+            <th>Price</th>
+            <th>Actions</th>
+        </tr>
+
+        @foreach (var item in Model.SelectedCarOrders)
+        {
+            <tr>
+                <td>
+                    @item.Status
+                </td>
+                <td>
+                    @item.AssignedMechanic
+                </td>
+                <td>
+                    @item.Price
+                </td>
+                <td>
+                    <a asp-controller="ServiceOrders" asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
+                    <a asp-controller="ServiceOrders" asp-action="Details" asp-route-id="@item.Id">Details</a> |
+                    <a asp-controller="ServiceOrders" asp-action="Delete" asp-route-id="@item.Id">Delete</a>
+                </td>
+
+            </tr>
+        }
+
+    </table>
+}
+
+}
+

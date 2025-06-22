@@ -13,5 +13,8 @@ namespace WorkshopManager.Models
 
         public Car selectedCar { get; set; }
 
+        public IEnumerable<ServiceOrder> SelectedCarOrders { get; set; }
+
+
     }
 }

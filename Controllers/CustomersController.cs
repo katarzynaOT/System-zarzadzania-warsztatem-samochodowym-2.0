@@ -43,6 +43,7 @@ namespace WorkshopManager.Controllers
                     i => i.Id == id.Value).Single();
                 viewModel.Cars = customer.Cars;
             }
+            System.Diagnostics.Debug.WriteLine("Selected carId:"+ carId);
 
             if (carId != null)
             {
@@ -52,6 +53,18 @@ namespace WorkshopManager.Controllers
                 Car car = customer.Cars.Where(
                     id =>id.Id == carId.Value).Single();
                 viewModel.selectedCar = car;
+
+                viewModel.SelectedCarOrders = car.Orders;
+
+                viewModel.SelectedCarOrders = await _context.ServiceOrders.Where(i => i.CarId == car.Id).ToListAsync();
+                System.Diagnostics.Debug.WriteLine("Car orders for:" + car.Name + " are:"+viewModel.SelectedCarOrders.ToString);
+                foreach (var item in viewModel.SelectedCarOrders)
+                {
+                    System.Diagnostics.Debug.WriteLine("Diagnostics for car:" + car.Name+ " "+item.Id + " done by "+item.AssignedMechanic);
+                }
+
+                System.Diagnostics.Debug.WriteLine("Found car:"+car.Name);
+
             }
             return View(viewModel);
         }

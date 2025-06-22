@@ -1,4 +1,4 @@
-﻿@model WorkshopManager.Models.Comment
+﻿@model WorkshopManager.Models.ServiceTask
 
 @{
     ViewData["Title"] = "Edit";
@@ -6,7 +6,7 @@
 
 <h1>Edit</h1>
 
-<h4>Comment</h4>
+<h4>ServiceTask</h4>
 <hr />
 <div class="row">
     <div class="col-md-4">
@@ -19,24 +19,19 @@
                 <span asp-validation-for="OrderId" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="CreatedDate" class="control-label"></label>
-                <input asp-for="CreatedDate" class="form-control" />
-                <span asp-validation-for="CreatedDate" class="text-danger"></span>
+                <label asp-for="Description" class="control-label"></label>
+                <input asp-for="Description" class="form-control" />
+                <span asp-validation-for="Description" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="Content" class="control-label"></label>
-                <input asp-for="Content" class="form-control" />
-                <span asp-validation-for="Content" class="text-danger"></span>
+                <label asp-for="Title" class="control-label"></label>
+                <input asp-for="Title" class="form-control" />
+                <span asp-validation-for="Title" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="Author" class="control-label"></label>
-                <input asp-for="Author" class="form-control" />
-                <span asp-validation-for="Author" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="AuthorId" class="control-label"></label>
-                <input asp-for="AuthorId" class="form-control" />
-                <span asp-validation-for="AuthorId" class="text-danger"></span>
+                <label asp-for="LaborCost" class="control-label"></label>
+                <input asp-for="LaborCost" class="form-control" />
+                <span asp-validation-for="LaborCost" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <input type="submit" value="Save" class="btn btn-primary" />

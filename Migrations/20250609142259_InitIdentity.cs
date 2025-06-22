@@ -88,6 +88,7 @@ namespace WorkshopManager.Data.Migrations
                     CreatedDate = table.Column<DateTime>(type: "datetime2", nullable: false),
                     UpdatedDate = table.Column<DateTime>(type: "datetime2", nullable: false),
                     Price = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
+                    CarId = table.Column<decimal>(type: "int", nullable: false),
                     CustomerId = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
