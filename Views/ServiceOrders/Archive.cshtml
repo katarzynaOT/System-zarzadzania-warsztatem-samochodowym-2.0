@@ -1,0 +1,112 @@
+﻿@namespace WorkshopManager.Pages
+@model WorkshopManager.Models.ServiceArchive
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Archive/Reporting of Service Orders</h1>
+
+<form class="form-group">
+    <div class="card-body">
+        <div class="row justify-content-center">
+            <div class="col-md-auto">
+                <label>Customer Name (contains)</label>&nbsp;
+                <input id="searchName" type="text" asp-for="SearchName" required />
+            </div>
+            <div class="col-md-auto">
+                <label>Car Name (contains)</label>&nbsp;
+                <input id="searchCar" type="text" asp-for="SearchCar" required />
+            </div>
+         </div>
+      <div class="row justify-content-center">
+            <div class="col-md-auto">
+                <label>From:</label>&nbsp;
+                <input id="fromDate" asp-for="FromDate" class="form-control" required />
+                <!--<input id="fromDate" type="text" asp-for="FromDate" class="datePicker" required />-->
+            </div>
+            <div class="col-md-auto">
+                <label>To:</label>&nbsp;
+                <input id="toDate" asp-for="ToDate" class="form-control" required />
+                <!--<input id="toDate" type="text" asp-for="ToDate" class="datePicker" required />-->
+            </div>
+        </div>
+        <div class="row justify-content-center">
+
+            <div class="col-md-auto">
+                <button type="submit" class="btn btn-primary btn-sm">Search</button>
+            </div>
+        </div>
+    </div>
+</form>
+
+@if (Model.SearchResults!= null)
+{
+    <table class="table">
+        <tr>
+
+            <th>Order Id</th>
+            <th>Customer Name</th>
+            <th>Car Name</th>
+            <th>Description</th>
+            <th>Completed Date</th>
+            <th>Total Cost</th>
+        </tr>
+
+        @foreach (var item in Model.SearchResults)
+        {
+            <tr class=>
+                <td>
+                    @item.Id
+                </td>
+                <td>
+                    @item.CustomerName
+                </td>
+                <td>
+                    @item.CarName
+                </td>
+                <td>
+                    @item.Description
+                </td>
+                <td>
+                    @item.CompletedDate
+                </td>
+                <td>
+                    @item.TotalCost
+                </td>
+
+            </tr>
+        }
+
+    </table>
+}
+
+
+@section Scripts{
+    <script>
+        function ApplyDateFilter(e) {
+            e.preventDefault(); 
+            var from = $("#fromDate").val();
+            var to = $("#toDate").val();
+            var name = $("#searchName").val();
+            var car = $("#searchCar").val();
+            debugger;
+            $.ajax({
+                type: "Get",
+                url: '@Url.Action("Archive", "ServiceOrders")',
+                data: //formData,
+                {
+                    FromDate: from,
+                    ToDate: to,
+                    SearchType: type,
+                    SearchText: text
+                },
+                contentType: "application/json",
+                success: function (response) {
+                    $("#content").html(""); //clear the records content
+                    $("#content").html(response);  //add the updated content.
+                }
+            });
+        } 
+    </script>
+}

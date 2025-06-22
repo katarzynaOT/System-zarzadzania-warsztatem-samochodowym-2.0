@@ -18,9 +18,10 @@ namespace WorkshopManager.Data
         {
             base.OnModelCreating(builder);
 
-            builder.Entity<ServiceOrder>()
+            /*builder.Entity<ServiceOrder>()
                    .Property(o => o.Price)
                    .HasPrecision(18, 4);
+            */
         }
         public DbSet<WorkshopManager.Models.Comment> Comments { get; set; } = default!;
         public DbSet<WorkshopManager.Models.ServiceTask> ServiceTasks { get; set; } = default!;

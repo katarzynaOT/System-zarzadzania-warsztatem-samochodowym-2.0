@@ -17,8 +17,14 @@
         {
             <li class="nav-item">
                 <a class="nav-link text-dark" asp-controller="Panel" asp-action="ManageUsers">
-                    Zarządzanie użytkownikami
+                    Manage Users
                 </a>
+                </li>
+           <li class="nav-item">
+                <a class="nav-link text-dark" asp-controller="Panel" asp-action="">
+                    Panel
+                </a>
+
             </li>
         }
 
@@ -26,7 +32,7 @@
         {
             <li class="nav-item">
                 <a class="nav-link text-dark" asp-controller="Panel" asp-action="MechanicDashboard">
-                    Panel Mechanika
+                    User Panel
                 </a>
             </li>
         }
@@ -34,8 +40,8 @@
         @if (User.IsInRole("Recepcjonista"))
         {
             <li class="nav-item">
-                <a class="nav-link text-dark" asp-controller="Panel" asp-action="ReceptionDashboard">
-                    Panel Recepcjonisty
+                <a class="nav-link text-dark" asp-controller="Panel" asp-action="">
+                    User Panel
                 </a>
             </li>
         }
@@ -56,16 +62,3 @@ else
     </li>
 }
 </ul>
-
-@if (User.Identity?.IsAuthenticated ?? false)
-{
-    <a asp-controller="Panel" asp-action="Index">Panel</a>
-    <form asp-area="Identity" asp-page="/Account/Logout" method="post" class="d-inline">
-        <button type="submit" class="btn btn-link">Wyloguj</button>
-    </form>
-}
-else
-{
-    <a asp-area="Identity" asp-page="/Account/Login">Zaloguj</a>
-    <a asp-area="Identity" asp-page="/Account/Register">Zarejestruj</a>
-}

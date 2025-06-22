@@ -54,6 +54,14 @@ namespace WorkshopManager.Controllers
             viewModel.Comments= comments;
             viewModel.ServiceTasks = await _context.ServiceTasks.Where(i => i.OrderId == serviceOrder.Id).ToListAsync();
 
+            foreach (var serviceTask in viewModel.ServiceTasks)
+            {
+                List<UsedPart> globalParts = new List<UsedPart>();
+                List<UsedPart> parts = await _context.UsedParts.Where(i =>i.ServiceTaskId == serviceTask.Id).ToListAsync();
+                globalParts.AddRange(parts);
+                viewModel.UsedParts = globalParts;
+            }
+
             //return View(serviceOrder);
             return View(viewModel);
         }
@@ -144,7 +152,7 @@ namespace WorkshopManager.Controllers
         }
 
         // GET: ServiceOrders/Edit/5
-        public async Task<IActionResult> Edit(int? id)
+        public async Task<IActionResult> Edit(int? id, int? recalc)
         {
             if (id == null)
             {
@@ -160,6 +168,30 @@ namespace WorkshopManager.Controllers
 
             ViewData["StatusId"] = getStatusListHelper();
             ViewData["MechanikId"] = await getMechanicUsersHelper();
+
+            if (recalc!=null && recalc>0)
+            {
+                //calculate whole order costs
+                //cost of all tasks
+                //cost of all parts for a given task
+                //await _context.ServiceOrders.Where(i => i.CarId == car.Id).ToListAsync();
+                int totalCost=0;
+                List<ServiceTask> serviceTasks = await _context.ServiceTasks.Where(i => i.OrderId == serviceOrder.Id).ToListAsync();
+                foreach (var task in serviceTasks)
+                {
+                    System.Diagnostics.Debug.WriteLine("Labor cost for task " + task.Title+" is:"+task.LaborCost);
+                    totalCost += task.LaborCost;
+                    List<UsedPart> usedParts = await _context.UsedParts.Where(i=>i.ServiceTaskId == task.Id).ToListAsync();
+                    foreach (var part in usedParts)
+                    {
+                        System.Diagnostics.Debug.WriteLine("\tParts cost for task " + task.Title + " is:" + part.TotalCost);
+                        totalCost += part.TotalCost;
+                    }
+                }
+                System.Diagnostics.Debug.WriteLine("Total labor cost:"+totalCost);
+                serviceOrder.Price = totalCost;
+            }
+            System.Diagnostics.Debug.WriteLine("Passing down to total labor cost:" + serviceOrder.Price);
             return View(serviceOrder);
         }
 
@@ -168,12 +200,14 @@ namespace WorkshopManager.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,CarId,Description,Status,CompletedDate, AssignedMechanic,Price")] ServiceOrder serviceOrder)
+        public async Task<IActionResult> Edit(int id, [Bind("Id,CarId,Description,Status,CompletedDate,AssignedMechanic,Price")] ServiceOrder serviceOrder)
         {
             if (id != serviceOrder.Id)
             {
                 return NotFound();
             }
+
+            System.Diagnostics.Debug.WriteLine("Saving ServiceOrder with total cost:" + serviceOrder.Price);
 
             if (serviceOrder.Status.Contains("Completed"))
             {
@@ -224,6 +258,70 @@ namespace WorkshopManager.Controllers
             }
 
             return View(serviceOrder);
+        }
+
+
+        public async Task<IActionResult> Archive(string? FromDate, string? ToDate, string? SearchName, string? SearchCar)
+        {
+            ServiceArchive archive = new ServiceArchive();
+            System.Diagnostics.Debug.WriteLine("Archive for orders invoked");
+
+            if (SearchName != null && SearchCar != null)
+            {
+                System.Diagnostics.Debug.WriteLine("Archive for orders:" + FromDate + " " + ToDate + " " + SearchName + " " + SearchCar);
+                archive.SearchCar = SearchCar;
+                archive.SearchName = SearchName;
+                DateTime from;
+                DateTime.TryParse(FromDate, out from);
+                DateTime to;
+                DateTime.TryParse(ToDate, out to);
+
+                archive.FromDate = from;
+                archive.ToDate = to;
+
+                List<ServiceRecord> filteredOrders = new List<ServiceRecord>();
+                List<ServiceOrder> orders = await _context.ServiceOrders.ToListAsync();
+                foreach (var order in orders)
+                {
+                    System.Diagnostics.Debug.WriteLine("Checking order:" + order.Id);
+
+                   String orderDateString = order.CompletedDate;
+                    DateTime orderDateTime;
+                    System.Diagnostics.Debug.WriteLine("Order completed date" + orderDateString);
+
+                    Car car = await _context.Cars.Where(i => i.Id == order.CarId).FirstAsync();
+                    Customer customer = await _context.Customers.Where(i => i.Id == car.CustomerId).FirstAsync();
+
+                    System.Diagnostics.Debug.WriteLine("Customer Name" + customer.Name + "Car name "+car.Name);
+                    if (customer.Name.Contains(SearchName) || car.Name.Contains(SearchCar))
+                    if (DateTime.TryParse(orderDateString, out orderDateTime))
+                    {
+                        System.Diagnostics.Debug.WriteLine("Order completed date"+orderDateString);
+                        System.Diagnostics.Debug.WriteLine("Date order" + orderDateTime);
+                        System.Diagnostics.Debug.WriteLine("Date From" + from);
+                        System.Diagnostics.Debug.WriteLine("Date to" + to);
+                            if (orderDateTime >from && orderDateTime < to)
+                        {
+                            ServiceRecord record = new ServiceRecord();
+                            record.CarName = car.Name;
+                            record.CustomerName = customer.Name;
+                            record.Id = order.Id;
+                            record.TotalCost = order.Price;
+                            record.Description = order.Description;
+                                if (DateTime.TryParse(orderDateString, out orderDateTime))
+                                record.CompletedDate = orderDateTime;
+                            filteredOrders.Add(record);
+                            System.Diagnostics.Debug.WriteLine("Appended order to result list:" + order.Id);
+                        }
+                    }
+                }
+                foreach (var record in filteredOrders)
+                {
+                    System.Diagnostics.Debug.WriteLine("Order:" + record.Id + " " + record.Description + " " + record.CarName);
+                }
+                archive.SearchResults = filteredOrders;
+            }
+            return View(archive);
         }
 
         // POST: ServiceOrders/Delete/5

@@ -123,8 +123,8 @@ namespace WorkshopManager.Controllers
                 return NotFound();
             }
 
-            if (ModelState.IsValid)
-            {
+            //if (ModelState.IsValid)
+            //{
                 try
                 {
                     _context.Update(serviceTask);
@@ -142,7 +142,7 @@ namespace WorkshopManager.Controllers
                     }
                 }
                 return RedirectToAction(nameof(Index));
-            }
+            //}
             ViewData["OrderId"] = new SelectList(_context.ServiceOrders, "Id", "Id", serviceTask.OrderId);
             return View(serviceTask);
         }

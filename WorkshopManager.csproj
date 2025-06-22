@@ -66,6 +66,8 @@
 	<ItemGroup>
 	  <Folder Include="DTOs\" />
 	  <Folder Include="Services\" />
+	  <Folder Include="WorkshopManager\wwwroot\images\" />
+	  <Folder Include="wwwroot\images\" />
 	  <Folder Include="wwwroot\uploads\" />
 	</ItemGroup>
 

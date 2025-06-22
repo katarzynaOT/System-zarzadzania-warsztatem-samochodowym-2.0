@@ -47,7 +47,7 @@ namespace WorkshopManager.Controllers
         }
 
         // GET: UsedParts/Create
-        public IActionResult Create(int? servicetask_id)
+        public IActionResult Create(int? servicetask_id, int? recalc, int? quantity, int? partId)
         {
             var partsTable = _context.Parts
             .Select(s => new
@@ -70,7 +70,23 @@ namespace WorkshopManager.Controllers
                 //ViewData["PartId"] = new SelectList(_context.Parts, "Id", "Id");
                 ViewData["ServiceTaskId"] = new SelectList(_context.ServiceTasks, "Id", "Id");
             }
-            return View();
+
+            if (recalc != null && recalc > 0 && quantity != null)
+            {
+                System.Diagnostics.Debug.WriteLine("Used Parts recalc request with quantity:" + quantity);
+
+                var part = _context.Parts.Find(partId);
+                if (part != null)
+                {
+                    var partsCost = part.UnitPrice * (int)(quantity ?? 1);
+                    ViewData["NewCost"] = partsCost;
+
+                }
+                System.Diagnostics.Debug.WriteLine("ViewData[NewCost]:" + ViewData["NewCost"]);
+            }
+            else ViewData["NewCost"] = 0;
+
+                return View();
         }
 
         // POST: UsedParts/Create
@@ -92,7 +108,7 @@ namespace WorkshopManager.Controllers
         }
 
         // GET: UsedParts/Edit/5
-        public async Task<IActionResult> Edit(int? id, int? servicetask_id)
+        public async Task<IActionResult> Edit(int? id, int? servicetask_id, int? recalc, int? quantity, int? partId)
         {
             if (id == null)
             {
@@ -103,6 +119,18 @@ namespace WorkshopManager.Controllers
             if (usedPart == null)
             {
                 return NotFound();
+            }
+
+            if (recalc != null && recalc > 0 && quantity !=null)
+            {
+                System.Diagnostics.Debug.WriteLine("Used Parts recalc request with quantity:"+quantity);
+                
+                var part = await _context.Parts.FindAsync(partId);
+                if (part != null)
+                {
+                    var partsCost = part.UnitPrice * (int)(quantity ?? 1);
+                    usedPart.TotalCost = partsCost;
+                }
             }
 
             var partsTable = _context.Parts
@@ -137,17 +165,18 @@ namespace WorkshopManager.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,PartId,ServiceTaskId,Quantity,TotalCost")] UsedPart usedPart)
+        public async Task<IActionResult> Edit(int id, [Bind("Id,PartId,ServiceTaskId,Quantity,TotalCost")] UsedPart usedPart, int? recalc)
         {
             if (id != usedPart.Id)
             {
                 return NotFound();
             }
 
+
             //if (ModelState.IsValid)
             //{
-                try
-                {
+            try
+            {
                     _context.Update(usedPart);
                     await _context.SaveChangesAsync();
                 }

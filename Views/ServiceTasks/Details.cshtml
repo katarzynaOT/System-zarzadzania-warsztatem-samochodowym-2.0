@@ -50,7 +50,7 @@
 {
     <table class="table">
         <tr>
-
+            <th>Part Id</th>
             <th>Part Name</th>
             <th>Quantity</th>
             <th>Cost</th>
@@ -60,6 +60,10 @@
         @foreach (var item in Model.TaskParts)
         {
             <tr>
+                <td>
+                    @item.Part.Id
+                </td>
+
                 <td>
                     @item.Part.Name
                 </td>

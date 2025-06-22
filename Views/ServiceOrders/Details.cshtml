@@ -1,5 +1,8 @@
 ﻿<!-- at+model WorkshopManager.Models.ServiceOrder -->
 @model WorkshopManager.Models.OrderIndexData
+@inject SignInManager<ApplicationUser> SignInManager
+@inject UserManager<ApplicationUser> UserManager
+
 
 @{
     ViewData["Title"] = "Details";
@@ -63,7 +66,14 @@
 </div>
 
 <h3>Comments for the Service Order</h3>
-<a asp-controller="Comments" asp-action="Create" asp-route-serviceorder_id="@Model?.Order.Id">Add New Comment</a>
+
+@if (SignInManager.IsSignedIn(User))
+{
+    <p>
+        <a asp-controller="Comments" asp-action="Create" asp-route-serviceorder_id="@Model?.Order.Id">Add New Comment</a>
+    </p>
+}
+
 
 @if (Model.Comments!= null)
 {
@@ -139,7 +149,7 @@
                     @if (item.UsedParts!=null) {
                         @foreach (var part in item.UsedParts)
                         {
-                            @part.Quantity @part.Part.Name<br/>
+                            @part.Quantity @Html.Raw("x of ") @part.PartId @Html.Raw(" (total cost:") @part.TotalCost @Html.Raw("PLN)")<br />
                         }
                     }
                     else

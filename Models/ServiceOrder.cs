@@ -16,6 +16,6 @@
 
         public List<ServiceTask> Tasks { get; set; }
         public List<Comment> Comments { get; set; }
-        public int Price { get; internal set; }
+        public int Price { get; set; }
     }
 }

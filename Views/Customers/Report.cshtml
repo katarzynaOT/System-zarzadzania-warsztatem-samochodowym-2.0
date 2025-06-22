@@ -7,11 +7,9 @@
     int customerId = -1 ;
 }
 
-<h1>Customers Registered in Workshop</h1>
+<h1>Customer Order Reports</h1>
+<p>Click on report next to customer or select customer to access their car reports.</p>
 
-<p>
-    <a asp-action="Create" class="btn btn-success">Add New Customer</a>
-</p>
 <table class="table">
     <thead>
         <tr>
@@ -69,20 +67,17 @@
                 }
             </td>
             <td>
-                <a asp-action="Index" asp-route-id="@item.Id">Select</a> | 
-                <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
-                <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
-                <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
+                <a asp-action="Report" asp-route-id="@item.Id">Car Reports</a> | 
+                <a asp-action="Report" asp-route-customerid="@item.Id">Customer Report</a>
             </td>
         </tr>
 }
     </tbody>
 </table>
 
-    <h3>Cars owned by a customer</h3>
-    <a asp-controller="Cars" asp-action="Create" asp-route-customer_id="@customerId">Create New</a>
 @if (Model.Cars != null)
 {
+    <h3>Cars owned by a customer</h3>
     <table class="table">
         <tr>
             
@@ -114,10 +109,7 @@
                     @item.RegistrationPlate
                 </td>
                 <td>
-                    <a asp-action="Index" asp-route-carId="@item.Id">Select</a> | 
-                    <a asp-controller="Cars" asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
-                    <a asp-controller="Cars" asp-action="Details" asp-route-id="@item.Id">Details</a> |
-                    <a asp-controller="Cars" asp-action="Delete" asp-route-id="@item.Id">Delete</a>
+                    <a asp-action="Report" asp-route-carId="@item.Id">Car Report</a>
                 </td>
 
             </tr>
@@ -126,27 +118,46 @@
     </table>
 }
 
-@if (Model.selectedCar != null)
+@if (Model.selectedCustomer !=null && Model.selectedCar ==null)
 {
-    <a asp-controller="ServiceOrders" asp-action="Create" asp-route-car_id="@Model.selectedCar.Id">Create New Order</a>   
+    <h2>All Orders for Customer: @Model.selectedCustomer.Name @Model.selectedCustomer.LastName</h2>
+}
 
+@if (Model.selectedCustomer !=null && Model.selectedCar !=null)
+{
+    <h2>All Orders for Customer's: @Model.selectedCustomer.Name @Model.selectedCustomer.LastName car: @Model.selectedCar.Name</h2>
+}
 
 @if (Model.SelectedCarOrders != null)
 {
     <table class="table">
         <tr>
-            
+            <th>Car Id</th>
+            <th>Car Name</th>
+            <th>Service Description</th>
             <th>Order Status</th>
+            <th>Completed Date</th>
             <th>Assigned Mechanic</th>
-            <th>Price</th>
-            <th>Actions</th>
+            <th>Final Price</th>
         </tr>
 
         @foreach (var item in Model.SelectedCarOrders)
         {
             <tr>
                 <td>
+                    @item.CarId
+                </td>
+                <td>
+                    @item.Car.Name
+                </td>
+                <td>
+                    @item.Description
+                </td>
+                <td>
                     @item.Status
+                </td>
+                <td>
+                    @item.CompletedDate
                 </td>
                 <td>
                     @item.AssignedMechanic
@@ -154,17 +165,10 @@
                 <td>
                     @item.Price
                 </td>
-                <td>
-                    <a asp-controller="ServiceOrders" asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
-                    <a asp-controller="ServiceOrders" asp-action="Details" asp-route-id="@item.Id">Details</a> |
-                    <a asp-controller="ServiceOrders" asp-action="Delete" asp-route-id="@item.Id">Delete</a>
-                </td>
 
             </tr>
         }
 
     </table>
-}
-
 }
 
