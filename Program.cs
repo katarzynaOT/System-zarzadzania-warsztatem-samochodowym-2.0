@@ -82,6 +82,70 @@ using (var scope = app.Services.CreateScope())
         }
     }
 
+    // Tworzenie domyslnego recepcjonisty
+    string recEmail = "user@workshop.com";
+    string recPassword = "User123!";
+    var recUser = new ApplicationUser
+    {
+        FirstName = "Maja",
+        LastName = "Wojtowicz",
+        Email = recEmail,
+        UserName = recEmail,
+    };
+    existingUser = await userManager.FindByEmailAsync(recEmail);
+    if (existingUser == null)
+    {
+        var result = await userManager.CreateAsync(recUser, recPassword);
+        if (result.Succeeded)
+        {
+            await userManager.AddToRoleAsync(recUser, "Recepcjonista");
+        }
+    }
+
+    // Tworzenie domyslnych mechanikow
+    string mech1Email = "mech1@workshop.com";
+    string mech1Password = "Mech123!";
+    var mech1User = new ApplicationUser
+    {
+        FirstName = "Jan",
+        LastName = "Mechanik",
+        Email = mech1Email,
+        UserName = mech1Email,
+    };
+    existingUser = await userManager.FindByEmailAsync(mech1Email);
+    if (existingUser == null)
+    {
+        var result = await userManager.CreateAsync(mech1User, mech1Password);
+        if (result.Succeeded)
+        {
+            await userManager.AddToRoleAsync(mech1User, "Mechanik");
+        }
+    }
+
+    // Tworzenie domyslnych mechanikow
+    string mech2Email = "mech2@workshop.com";
+    string mech2Password = "Mech123!";
+    var mech2User = new ApplicationUser
+    {
+        FirstName = "Andrzej",
+        LastName = "Elektryk",
+        Email = mech2Email,
+        UserName = mech2Email,
+    };
+    existingUser = await userManager.FindByEmailAsync(mech2Email);
+    if (existingUser == null)
+    {
+        var result = await userManager.CreateAsync(mech2User, mech2Password);
+        if (result.Succeeded)
+        {
+            await userManager.AddToRoleAsync(mech2User, "Mechanik");
+        }
+    }
+
+    var services = scope.ServiceProvider;
+
+    SeedData.Initialize(services);
+
 }
 
 builder.Services.AddAuthentication();
