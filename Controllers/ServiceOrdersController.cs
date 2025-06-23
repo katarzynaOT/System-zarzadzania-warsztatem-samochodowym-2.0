@@ -7,8 +7,13 @@ using System.Linq;
 using System.Runtime.ConstrainedExecution;
 using System.Threading.Tasks;
 using WorkshopManager.Data;
+using WorkshopManager.Documents;
 using WorkshopManager.Models;
 using WorkshopManager.Services;
+using QuestPDF.Fluent;
+using QuestPDF.Helpers;
+using QuestPDF.Infrastructure;
+using System.Globalization;
 
 namespace WorkshopManager.Controllers
 {
@@ -344,5 +349,43 @@ namespace WorkshopManager.Controllers
         {
             return _context.ServiceOrders.Any(e => e.Id == id);
         }
+
+        [HttpPost]
+        public async Task<IActionResult> GenerateReportPdf(ServiceArchive model)
+        {
+            var query = _context.ServiceOrders
+                .Include(o => o.Car)
+                .ThenInclude(c => c.Customer)
+                .AsQueryable();
+
+            if (!string.IsNullOrEmpty(model.SearchName))
+                query = query.Where(o => o.Car.Customer.Name.Contains(model.SearchName));
+
+            if (!string.IsNullOrEmpty(model.SearchCar))
+                query = query.Where(o => o.Car.Name.Contains(model.SearchCar));
+
+            var results = await query.ToListAsync();
+
+            //if (model.FromDate.HasValue)
+            //{
+            //    results = results.Where(o =>
+            //        DateTime.TryParse(o.CompletedDate, out var parsed) &&
+            //        parsed >= model.FromDate.Value).ToList();
+            //}
+
+            //if (model.ToDate.HasValue)
+            //{
+            //    results = results.Where(o =>
+            //        DateTime.TryParse(o.CompletedDate, out var parsed) &&
+            //        parsed <= model.ToDate.Value).ToList();
+            //}
+
+            var document = new ServiceOrdersReportDocument(results);
+            var pdf = document.GeneratePdf();
+
+            return File(pdf, "application/pdf", "raport.pdf");
+        }
+
+
     }
 }

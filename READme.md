@@ -6,7 +6,7 @@ Aplikacja webowa umożliwia: dodawanie klientów, pojazdów, zleceń serwisowych
 
 ---
 
-Rejestracja i logowanie użytkowników (ASP.NET Identity).
+Rejestracja i logowanie użytkowników (ASP.NET Identity).<br>
 Role: Admin, Mechanik, Recepcjonista.
 
 ---
@@ -48,15 +48,15 @@ Role: Admin, Mechanik, Recepcjonista.
 
 ## Struktura katalogów
 
-WorkshopManager/
-│
-├── /
-├── wwwroot/
-│   └── uploads/   # zdjęcia pojazdów
-├── Controllers/
-├── Models/
-├── Services/  
-├── Views/       
+WorkshopManager/<br>
+│<br>
+├── /<br>
+├── wwwroot/<br>
+│   └── uploads/   # zdjęcia pojazdów<br>
+├── Controllers/<br>
+├── Models/<br>
+├── Services/<br>
+├── Views/<br>
 ├── Migrations/
-├── Data/          # ApplicationDbContext, SeedData
-└── Program.cs
+├── Data/          # ApplicationDbContext, SeedData<br>
+└── Program.cs<br>
