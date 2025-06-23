@@ -57,6 +57,6 @@ WorkshopManager/<br>
 ├── Models/<br>
 ├── Services/<br>
 ├── Views/<br>
-├── Migrations/
+├── Migrations/<br>
 ├── Data/          # ApplicationDbContext, SeedData<br>
 └── Program.cs<br>
