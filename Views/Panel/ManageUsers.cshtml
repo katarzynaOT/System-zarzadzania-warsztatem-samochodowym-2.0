@@ -1,0 +1,39 @@
+﻿@model List<WorkshopManager.Models.ApplicationUser>
+
+<h2>Zarządzanie użytkownikami</h2>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>ID</th>
+            <th>Email</th>
+            <th>Rola</th>
+            <th>Akcja</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var user in Model)
+        {
+            <tr>
+                <td>@user.Id</td>
+                <td>@user.Email</td>
+                <td>@string.Join(", ", ViewBag.UserRoles[user.Id])</td>
+                <td>
+                    <form controller="Panel" action="ChangeUserRole" method="post" id="roleForm-@user.Id">
+                        @using (Html.BeginForm("ChangeUserRole", "Panel", FormMethod.Post))
+                        {
+                            @Html.AntiForgeryToken()
+                            <input type="hidden" name="userId" value="@user.Id" />
+                            <select name="newRole" class="form-control">
+                                <option value="Admin">Admin</option>
+                                <option value="Mechanik">Mechanik</option>
+                                <option value="Recepcjonista">Recepcjonista</option>
+                            </select>
+                            <button type="submit" class="btn btn-primary">Zmień rolę</button>
+                        }
+                    </form>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

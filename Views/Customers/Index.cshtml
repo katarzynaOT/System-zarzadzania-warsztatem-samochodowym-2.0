@@ -1,0 +1,170 @@
+﻿<!--at+model IEnumerable<WorkshopManager.Models.Customer>-->
+@namespace WorkshopManager.Pages
+@model WorkshopManager.Models.CustomerIndexData
+
+@{
+    ViewData["Title"] = "Customers";
+    int customerId = -1 ;
+}
+
+<h1>Customers Registered in Workshop</h1>
+
+<p>
+    <a asp-action="Create" class="btn btn-success">Add New Customer</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                Customer Name
+            </th>
+            <th>
+                Customer Lastname            </th>
+            <th>
+                Customer Email
+            </th>
+            <th>
+                Customer Phone Number
+            </th>
+            <th>
+                Customer Address
+            </th>
+            <th>
+                Cars
+            </th>
+            <th>
+                Actions
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+        
+@foreach (var item in Model.Customers) {
+            string selectedRow = "";
+            if (item.Id == (int?)ViewData["CustomerID"])
+            {
+                selectedRow = "table-success";
+                customerId = item.Id;
+            }
+        <tr class="@selectedRow">
+            <td>
+                @Html.DisplayFor(modelItem => item.Name)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.LastName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Email)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Phone)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Address)
+            </td>
+            <td>
+                @foreach (var car in item.Cars)
+                {
+                    @car.Name @Html.Raw("-") @car.RegistrationPlate <br/>
+                }
+            </td>
+            <td>
+                <a asp-action="Index" asp-route-id="@item.Id">Select</a> | 
+                <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
+                <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
+                <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>
+
+    <h3>Cars owned by a customer</h3>
+    <a asp-controller="Cars" asp-action="Create" asp-route-customer_id="@customerId">Create New</a>
+@if (Model.Cars != null)
+{
+    <table class="table">
+        <tr>
+            
+            <th>Name</th>
+            <th>Brand</th>
+            <th>Model</th>
+            <th>Registration Plate</th>
+            <th>Actions</th>
+        </tr>
+
+        @foreach (var item in Model.Cars)
+        {
+            string selectedRow = "";
+            if (item.Id == (int?)ViewData["CarID"])
+            {
+                selectedRow = "table-success";
+            }
+            <tr class="@selectedRow">
+                <td>
+                    @item.Name
+                </td>
+                <td>
+                    @item.Brand
+                </td>
+                <td>
+                    @item.Model
+                </td>
+                <td>
+                    @item.RegistrationPlate
+                </td>
+                <td>
+                    <a asp-action="Index" asp-route-carId="@item.Id">Select</a> | 
+                    <a asp-controller="Cars" asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
+                    <a asp-controller="Cars" asp-action="Details" asp-route-id="@item.Id">Details</a> |
+                    <a asp-controller="Cars" asp-action="Delete" asp-route-id="@item.Id">Delete</a>
+                </td>
+
+            </tr>
+        }
+
+    </table>
+}
+
+@if (Model.selectedCar != null)
+{
+    <a asp-controller="ServiceOrders" asp-action="Create" asp-route-car_id="@Model.selectedCar.Id">Create New Order</a>   
+
+
+@if (Model.SelectedCarOrders != null)
+{
+    <table class="table">
+        <tr>
+            
+            <th>Order Status</th>
+            <th>Assigned Mechanic</th>
+            <th>Price</th>
+            <th>Actions</th>
+        </tr>
+
+        @foreach (var item in Model.SelectedCarOrders)
+        {
+            <tr>
+                <td>
+                    @item.Status
+                </td>
+                <td>
+                    @item.AssignedMechanic
+                </td>
+                <td>
+                    @item.Price
+                </td>
+                <td>
+                    <a asp-controller="ServiceOrders" asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
+                    <a asp-controller="ServiceOrders" asp-action="Details" asp-route-id="@item.Id">Details</a> |
+                    <a asp-controller="ServiceOrders" asp-action="Delete" asp-route-id="@item.Id">Delete</a>
+                </td>
+
+            </tr>
+        }
+
+    </table>
+}
+
+}
+

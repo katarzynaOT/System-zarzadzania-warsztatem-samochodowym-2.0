@@ -1,0 +1,10 @@
+﻿namespace WorkshopManager.Models
+{
+    public class Part
+    {
+        public int Id { get; set; }
+        public string Name { get; set; }
+        public string Type { get; set; }
+        public int UnitPrice { get; set; }
+    }
+}

@@ -1,0 +1,12 @@
+﻿@{
+    ViewData["Title"] = "Panel użytkownika";
+}
+
+<h2>Panel użytkownika</h2>
+<p>Zalogowano jako: @User.Identity?.Name</p>
+
+@if (User.IsInRole("Admin"))
+{
+    <h3>Panel administracyjny</h3>
+    <a asp-controller="Panel" asp-action="ManageUsers" class="btn btn-primary">Zarządzanie użytkownikami</a>
+}
