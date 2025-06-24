@@ -1,4 +1,8 @@
 ﻿using Microsoft.AspNetCore.Mvc.Rendering;
+<<<<<<< HEAD
+=======
+//using WorkshopManager.Models;
+>>>>>>> 54dcd2ecc6acc825d8f83c067fbe8d639c7b5495
 
 namespace WorkshopManager.Models
 {

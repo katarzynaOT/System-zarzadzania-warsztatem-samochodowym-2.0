@@ -3,29 +3,24 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using WorkshopManager.Data;
 
 #nullable disable
 
-<<<<<<< HEAD
-namespace WorkshopManager.Data.Migrations
-=======
 namespace WorkshopManager.Migrations
->>>>>>> 54dcd2ecc6acc825d8f83c067fbe8d639c7b5495
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20250623122236_InitialCreate")]
+    partial class InitialCreate
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
-<<<<<<< HEAD
-                .HasAnnotation("ProductVersion", "8.0.11")
-=======
                 .HasAnnotation("ProductVersion", "8.0.4")
->>>>>>> 54dcd2ecc6acc825d8f83c067fbe8d639c7b5495
                 .HasAnnotation("Relational:MaxIdentifierLength", 128);
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
@@ -183,17 +178,9 @@ namespace WorkshopManager.Migrations
                         .HasColumnType("bit");
 
                     b.Property<string>("FirstName")
-<<<<<<< HEAD
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("LastName")
-                        .IsRequired()
-=======
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("LastName")
->>>>>>> 54dcd2ecc6acc825d8f83c067fbe8d639c7b5495
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<bool>("LockoutEnabled")
@@ -253,6 +240,9 @@ namespace WorkshopManager.Migrations
                     b.Property<string>("Brand")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("CarId")
+                        .HasColumnType("int");
 
                     b.Property<int>("CustomerId")
                         .HasColumnType("int");
@@ -401,10 +391,6 @@ namespace WorkshopManager.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<int>("Price")
-<<<<<<< HEAD
-                        .HasPrecision(18, 4)
-=======
->>>>>>> 54dcd2ecc6acc825d8f83c067fbe8d639c7b5495
                         .HasColumnType("int");
 
                     b.Property<string>("Status")

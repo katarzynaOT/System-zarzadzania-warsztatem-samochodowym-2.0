@@ -33,8 +33,12 @@
                         <li class="nav-item">
                             <a class="nav-link text-dark" asp-area=""  asp-page="/Panel">Name</a>
                         </li>-->
+<<<<<<< HEAD
 
 @if (SignInManager.IsSignedIn(User))
+=======
+                        @if (SignInManager.IsSignedIn(User))
+>>>>>>> 54dcd2ecc6acc825d8f83c067fbe8d639c7b5495
                         {
                             @if (User.Identity.IsAuthenticated && User.IsInRole("Recepcjonista"))
                             {
@@ -51,7 +55,11 @@
                                     <a class="nav-link text-dark" asp-area="" asp-controller="Parts" asp-action="Index">Parts</a>
                                 </li>
                             }
+<<<<<<< HEAD
                            @if (User.Identity.IsAuthenticated && User.IsInRole("Admin"))
+=======
+                            @if (User.Identity.IsAuthenticated && User.IsInRole("Admin"))
+>>>>>>> 54dcd2ecc6acc825d8f83c067fbe8d639c7b5495
                             {
                                 <li class="nav-item">
                                     <a class="nav-link text-dark" asp-area="" asp-controller="ServiceOrders" asp-action="Index">Orders</a>
@@ -95,7 +103,11 @@
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <script src="~/lib/bootstrap/dist/js/bootstrap.js"></script>
     <script src="~/js/site.js" asp-append-version="true"></script>
+<<<<<<< HEAD
     
+=======
+
+>>>>>>> 54dcd2ecc6acc825d8f83c067fbe8d639c7b5495
     @await RenderSectionAsync("Scripts", required: false)
 </body>
 </html>

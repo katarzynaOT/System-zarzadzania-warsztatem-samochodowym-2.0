@@ -4,8 +4,13 @@
 @inject UserManager<ApplicationUser> UserManager
 
 <ul class="navbar-nav">
+<<<<<<< HEAD
 @if (SignInManager.IsSignedIn(User))
 {
+=======
+    @if (SignInManager.IsSignedIn(User))
+    {
+>>>>>>> 54dcd2ecc6acc825d8f83c067fbe8d639c7b5495
         <li class="nav-item">
             <a class="nav-link text-dark" asp-area="Identity" asp-page="/Account/Manage/Index" title="Manage">
                 Hello @User.Identity?.Name!
@@ -19,8 +24,13 @@
                 <a class="nav-link text-dark" asp-controller="Panel" asp-action="ManageUsers">
                     Manage Users
                 </a>
+<<<<<<< HEAD
                 </li>
            <li class="nav-item">
+=======
+            </li>
+            <li class="nav-item">
+>>>>>>> 54dcd2ecc6acc825d8f83c067fbe8d639c7b5495
                 <a class="nav-link text-dark" asp-controller="Panel" asp-action="">
                     Panel
                 </a>
@@ -31,7 +41,11 @@
         @if (User.IsInRole("Mechanik"))
         {
             <li class="nav-item">
+<<<<<<< HEAD
                 <a class="nav-link text-dark" asp-controller="Panel" asp-action="">
+=======
+                <a class="nav-link text-dark" asp-controller="Panel" asp-action="MechanicDashboard">
+>>>>>>> 54dcd2ecc6acc825d8f83c067fbe8d639c7b5495
                     User Panel
                 </a>
             </li>
@@ -51,6 +65,7 @@
                 <button type="submit" class="nav-link btn btn-link text-dark">Logout</button>
             </form>
         </li>
+<<<<<<< HEAD
 }
 else
 {
@@ -61,4 +76,16 @@ else
         <a class="nav-link text-dark" asp-area="Identity" asp-page="/Account/Login">Login</a>
     </li>
 }
+=======
+    }
+    else
+    {
+        <li class="nav-item">
+            <a class="nav-link text-dark" asp-area="Identity" asp-page="/Account/Register">Register</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link text-dark" asp-area="Identity" asp-page="/Account/Login">Login</a>
+        </li>
+    }
+>>>>>>> 54dcd2ecc6acc825d8f83c067fbe8d639c7b5495
 </ul>

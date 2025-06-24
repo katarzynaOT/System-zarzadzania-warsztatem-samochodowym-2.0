@@ -7,7 +7,10 @@
     int customerId = -1 ;
 }
 
+<<<<<<< HEAD
 <center><img src="~/images/reports.jpg" width="1200" /></center>
+=======
+>>>>>>> 54dcd2ecc6acc825d8f83c067fbe8d639c7b5495
 <h1>Customer Order Reports</h1>
 <p>Click on report next to customer or select customer to access their car reports.</p>
 
@@ -18,7 +21,12 @@
                 Customer Name
             </th>
             <th>
+<<<<<<< HEAD
                 Customer Lastname            </th>
+=======
+                Customer Lastname            
+            </th>
+>>>>>>> 54dcd2ecc6acc825d8f83c067fbe8d639c7b5495
             <th>
                 Customer Email
             </th>
@@ -68,6 +76,10 @@
                 }
             </td>
             <td>
+<<<<<<< HEAD
+=======
+                <a asp-action="ReportPdf" asp-route-customerid="@item.Id" target="_blank">PDF Cutomer Report</a> 
+>>>>>>> 54dcd2ecc6acc825d8f83c067fbe8d639c7b5495
                 <a asp-action="Report" asp-route-id="@item.Id">Car Reports</a> | 
                 <a asp-action="Report" asp-route-customerid="@item.Id">Customer Report</a>
             </td>

@@ -3,6 +3,7 @@ bin/
 obj/
 *.user
 *.suo
+<<<<<<< HEAD
 *.vspscc
 *.vssscc
 *.dbmdl
@@ -13,3 +14,8 @@ obj/
 *.pdb
 *.ldb
 *.vsidx
+=======
+*.log
+*.cache
+*.tmp
+>>>>>>> 54dcd2ecc6acc825d8f83c067fbe8d639c7b5495

@@ -5,13 +5,29 @@
     ViewData["Title"] = "Index";
 }
 
+<<<<<<< HEAD
 <center><img src="~/images/archives.jpg" width="1200" /></center>
+=======
+>>>>>>> 54dcd2ecc6acc825d8f83c067fbe8d639c7b5495
 <h1>Archive/Reporting of Service Orders</h1>
 
 <form class="form-group">
     <div class="card-body">
         <div class="row justify-content-center">
             <div class="col-md-auto">
+<<<<<<< HEAD
+=======
+                <label>Customer Name (contains)</label>&nbsp;
+                <input id="searchName" type="text" asp-for="SearchName" required />
+            </div>
+            <div class="col-md-auto">
+                <label>Car Name (contains)</label>&nbsp;
+                <input id="searchCar" type="text" asp-for="SearchCar" required />
+            </div>
+         </div>
+      <div class="row justify-content-center">
+            <div class="col-md-auto">
+>>>>>>> 54dcd2ecc6acc825d8f83c067fbe8d639c7b5495
                 <label>From:</label>&nbsp;
                 <input id="fromDate" asp-for="FromDate" class="form-control" required />
                 <!--<input id="fromDate" type="text" asp-for="FromDate" class="datePicker" required />-->
@@ -31,7 +47,20 @@
     </div>
 </form>
 
+<<<<<<< HEAD
 @if (Model.SearchResults != null)
+=======
+<form method="post" asp-controller="ServiceOrders" asp-action="GenerateReportPdf">
+    <input type="hidden" name="SearchName" value="@Model.SearchName" />
+    <input type="hidden" name="SearchCar" value="@Model.SearchCar" />
+    <input type="hidden" name="FromDate" value="@Model.FromDate?.ToString("yyyy-MM-dd")" />
+    <input type="hidden" name="ToDate" value="@Model.ToDate?.ToString("yyyy-MM-dd")" />
+    <button type="submit" class="btn btn-success">Generuj PDF</button>
+</form>
+
+
+@if (Model.SearchResults!= null)
+>>>>>>> 54dcd2ecc6acc825d8f83c067fbe8d639c7b5495
 {
     <table class="table">
         <tr>
@@ -73,10 +102,17 @@
 }
 
 
+<<<<<<< HEAD
 @section Scripts {
     <script>
         function ApplyDateFilter(e) {
             e.preventDefault();
+=======
+@section Scripts{
+    <script>
+        function ApplyDateFilter(e) {
+            e.preventDefault(); 
+>>>>>>> 54dcd2ecc6acc825d8f83c067fbe8d639c7b5495
             var from = $("#fromDate").val();
             var to = $("#toDate").val();
             var name = $("#searchName").val();
@@ -98,6 +134,10 @@
                     $("#content").html(response);  //add the updated content.
                 }
             });
+<<<<<<< HEAD
         }
+=======
+        } 
+>>>>>>> 54dcd2ecc6acc825d8f83c067fbe8d639c7b5495
     </script>
 }

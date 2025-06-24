@@ -51,10 +51,17 @@ namespace WorkshopManager.Controllers
         {
             var partsTable = _context.Parts
             .Select(s => new
+<<<<<<< HEAD
                 {
                 Id = s.Id,
                 PartName = string.Format("{0} - {1}", s.Type, s.Name)
              }).ToList();
+=======
+            {
+                Id = s.Id,
+                PartName = string.Format("{0} - {1}", s.Type, s.Name)
+            }).ToList();
+>>>>>>> 54dcd2ecc6acc825d8f83c067fbe8d639c7b5495
             ViewData["PartId"] = new SelectList(partsTable, "Id", "PartName");
 
             if (servicetask_id != null)
@@ -86,7 +93,11 @@ namespace WorkshopManager.Controllers
             }
             else ViewData["NewCost"] = 0;
 
+<<<<<<< HEAD
                 return View();
+=======
+            return View();
+>>>>>>> 54dcd2ecc6acc825d8f83c067fbe8d639c7b5495
         }
 
         // POST: UsedParts/Create
@@ -98,9 +109,15 @@ namespace WorkshopManager.Controllers
         {
             //if (ModelState.IsValid)
             //{
+<<<<<<< HEAD
                 _context.Add(usedPart);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
+=======
+            _context.Add(usedPart);
+            await _context.SaveChangesAsync();
+            return RedirectToAction(nameof(Index));
+>>>>>>> 54dcd2ecc6acc825d8f83c067fbe8d639c7b5495
             //}
             ViewData["PartId"] = new SelectList(_context.Parts, "Id", "Id", usedPart.PartId);
             ViewData["ServiceTaskId"] = new SelectList(_context.ServiceTasks, "Id", "Id", usedPart.ServiceTaskId);
@@ -121,10 +138,17 @@ namespace WorkshopManager.Controllers
                 return NotFound();
             }
 
+<<<<<<< HEAD
             if (recalc != null && recalc > 0 && quantity !=null)
             {
                 System.Diagnostics.Debug.WriteLine("Used Parts recalc request with quantity:"+quantity);
                 
+=======
+            if (recalc != null && recalc > 0 && quantity != null)
+            {
+                System.Diagnostics.Debug.WriteLine("Used Parts recalc request with quantity:" + quantity);
+
+>>>>>>> 54dcd2ecc6acc825d8f83c067fbe8d639c7b5495
                 var part = await _context.Parts.FindAsync(partId);
                 if (part != null)
                 {
@@ -135,10 +159,17 @@ namespace WorkshopManager.Controllers
 
             var partsTable = _context.Parts
             .Select(s => new
+<<<<<<< HEAD
                {
                 Id = s.Id,
                 PartName = string.Format("{0} - {1}", s.Type, s.Name)
                 }).ToList();
+=======
+            {
+                Id = s.Id,
+                PartName = string.Format("{0} - {1}", s.Type, s.Name)
+            }).ToList();
+>>>>>>> 54dcd2ecc6acc825d8f83c067fbe8d639c7b5495
             ViewData["PartId"] = new SelectList(partsTable, "Id", "PartName");
 
             if (servicetask_id != null)
@@ -177,6 +208,7 @@ namespace WorkshopManager.Controllers
             //{
             try
             {
+<<<<<<< HEAD
                     _context.Update(usedPart);
                     await _context.SaveChangesAsync();
                 }
@@ -192,6 +224,23 @@ namespace WorkshopManager.Controllers
                     }
                 }
                 return RedirectToAction(nameof(Index));
+=======
+                _context.Update(usedPart);
+                await _context.SaveChangesAsync();
+            }
+            catch (DbUpdateConcurrencyException)
+            {
+                if (!UsedPartExists(usedPart.Id))
+                {
+                    return NotFound();
+                }
+                else
+                {
+                    throw;
+                }
+            }
+            return RedirectToAction(nameof(Index));
+>>>>>>> 54dcd2ecc6acc825d8f83c067fbe8d639c7b5495
             //}
             ViewData["PartId"] = new SelectList(_context.Parts, "Id", "Id", usedPart.PartId);
             ViewData["ServiceTaskId"] = new SelectList(_context.ServiceTasks, "Id", "Id", usedPart.ServiceTaskId);

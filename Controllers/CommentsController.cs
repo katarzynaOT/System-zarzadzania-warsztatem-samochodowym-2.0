@@ -76,9 +76,15 @@ namespace WorkshopManager.Controllers
         {
             //if (ModelState.IsValid)
             //{
+<<<<<<< HEAD
                 _context.Add(comment);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
+=======
+            _context.Add(comment);
+            await _context.SaveChangesAsync();
+            return RedirectToAction(nameof(Index));
+>>>>>>> 54dcd2ecc6acc825d8f83c067fbe8d639c7b5495
             //}
             ViewData["OrderId"] = new SelectList(_context.ServiceOrders, "Id", "Id", comment.OrderId);
             return View(comment);
@@ -115,6 +121,7 @@ namespace WorkshopManager.Controllers
 
             //if (ModelState.IsValid)
             //{
+<<<<<<< HEAD
                 try
                 {
                     _context.Update(comment);
@@ -132,6 +139,25 @@ namespace WorkshopManager.Controllers
                     }
                 }
                 return RedirectToAction(nameof(Index));
+=======
+            try
+            {
+                _context.Update(comment);
+                await _context.SaveChangesAsync();
+            }
+            catch (DbUpdateConcurrencyException)
+            {
+                if (!CommentExists(comment.Id))
+                {
+                    return NotFound();
+                }
+                else
+                {
+                    throw;
+                }
+            }
+            return RedirectToAction(nameof(Index));
+>>>>>>> 54dcd2ecc6acc825d8f83c067fbe8d639c7b5495
             //}
             ViewData["OrderId"] = new SelectList(_context.ServiceOrders, "Id", "Id", comment.OrderId);
             return View(comment);

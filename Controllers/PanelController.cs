@@ -42,6 +42,10 @@ namespace WorkshopManager.Controllers
             }
             return BadRequest("Zmiana roli się nie powiodła.");
         }
+<<<<<<< HEAD
+=======
+
+>>>>>>> 54dcd2ecc6acc825d8f83c067fbe8d639c7b5495
     }
 
 }

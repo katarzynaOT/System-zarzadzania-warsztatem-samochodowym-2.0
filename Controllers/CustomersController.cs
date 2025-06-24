@@ -2,11 +2,24 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+<<<<<<< HEAD
+=======
+using System.IO;
+>>>>>>> 54dcd2ecc6acc825d8f83c067fbe8d639c7b5495
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using WorkshopManager.Data;
 using WorkshopManager.Models;
+<<<<<<< HEAD
+=======
+using Microsoft.AspNetCore.Mvc.ViewEngines;
+using Microsoft.AspNetCore.Mvc.ViewFeatures;
+using WorkshopManager.Services;
+using WorkshopManager.Documents;
+
+
+>>>>>>> 54dcd2ecc6acc825d8f83c067fbe8d639c7b5495
 
 namespace WorkshopManager.Controllers
 {
@@ -43,7 +56,11 @@ namespace WorkshopManager.Controllers
                     i => i.Id == id.Value).Single();
                 viewModel.Cars = customer.Cars;
             }
+<<<<<<< HEAD
             System.Diagnostics.Debug.WriteLine("Selected carId:"+ carId);
+=======
+            System.Diagnostics.Debug.WriteLine("Selected carId:" + carId);
+>>>>>>> 54dcd2ecc6acc825d8f83c067fbe8d639c7b5495
 
             if (carId != null)
             {
@@ -51,12 +68,17 @@ namespace WorkshopManager.Controllers
                 Customer customer = viewModel.Customers.Where(
                   i => i.Id == id.Value).Single();
                 Car car = customer.Cars.Where(
+<<<<<<< HEAD
                     id =>id.Id == carId.Value).Single();
+=======
+                    id => id.Id == carId.Value).Single();
+>>>>>>> 54dcd2ecc6acc825d8f83c067fbe8d639c7b5495
                 viewModel.selectedCar = car;
 
                 viewModel.SelectedCarOrders = car.Orders;
 
                 viewModel.SelectedCarOrders = await _context.ServiceOrders.Where(i => i.CarId == car.Id).ToListAsync();
+<<<<<<< HEAD
                 System.Diagnostics.Debug.WriteLine("Car orders for:" + car.Name + " are:"+viewModel.SelectedCarOrders.ToString);
                 foreach (var item in viewModel.SelectedCarOrders)
                 {
@@ -64,6 +86,15 @@ namespace WorkshopManager.Controllers
                 }
 
                 System.Diagnostics.Debug.WriteLine("Found car:"+car.Name);
+=======
+                System.Diagnostics.Debug.WriteLine("Car orders for:" + car.Name + " are:" + viewModel.SelectedCarOrders.ToString);
+                foreach (var item in viewModel.SelectedCarOrders)
+                {
+                    System.Diagnostics.Debug.WriteLine("Diagnostics for car:" + car.Name + " " + item.Id + " done by " + item.AssignedMechanic);
+                }
+
+                System.Diagnostics.Debug.WriteLine("Found car:" + car.Name);
+>>>>>>> 54dcd2ecc6acc825d8f83c067fbe8d639c7b5495
 
             }
             return View(viewModel);
@@ -78,14 +109,25 @@ namespace WorkshopManager.Controllers
                 .OrderBy(i => i.Name)
                 .ToListAsync();
 
+<<<<<<< HEAD
             if (customerid!=null)
             {
                 viewModel.selectedCustomer = await _context.Customers.Where(i=> i.Id == customerid).SingleAsync();
+=======
+            if (customerid != null)
+            {
+                viewModel.selectedCustomer = await _context.Customers.Where(i => i.Id == customerid).SingleAsync();
+>>>>>>> 54dcd2ecc6acc825d8f83c067fbe8d639c7b5495
 
                 //reports of all customer orders/across all cars
                 List<ServiceOrder> allOrders = new List<ServiceOrder>();
                 List<Car> customerCars = await _context.Cars.Where(i => i.CustomerId == customerid).ToListAsync();
+<<<<<<< HEAD
                 foreach (var car in customerCars) {
+=======
+                foreach (var car in customerCars)
+                {
+>>>>>>> 54dcd2ecc6acc825d8f83c067fbe8d639c7b5495
                     List<ServiceOrder> orders = await _context.ServiceOrders.Where(i => i.CarId == car.Id).ToListAsync();
                     //viewModel.SelectedCarOrders = await _context.ServiceOrders.Where(i => i.CarId == car.Id).ToListAsync();
                     foreach (var order in orders)
@@ -94,7 +136,11 @@ namespace WorkshopManager.Controllers
                     }
                     allOrders.AddRange(orders);
                 }
+<<<<<<< HEAD
                 viewModel.SelectedCarOrders= allOrders;
+=======
+                viewModel.SelectedCarOrders = allOrders;
+>>>>>>> 54dcd2ecc6acc825d8f83c067fbe8d639c7b5495
 
                 return View(viewModel);
             }
@@ -134,7 +180,49 @@ namespace WorkshopManager.Controllers
             }
             return View(viewModel);
         }
+<<<<<<< HEAD
         // GET: Customers/Details/5
+=======
+
+        [HttpGet]
+        public async Task<IActionResult> ReportPdf(int customerid)
+        {
+            var customer = await _context.Customers.FirstOrDefaultAsync(c => c.Id == customerid);
+            var cars = await _context.Cars.Where(c => c.CustomerId == customerid).ToListAsync();
+            var carOrders = new List<CarWithOrders>();
+
+            if (customer == null)
+                return NotFound();
+
+            foreach (var car in cars)
+            {
+                var orders = await _context.ServiceOrders
+                    .Where(o => o.CarId == car.Id)
+                    .ToListAsync();
+
+                // Przypisz samochód do zamówień (opcjonalnie)
+                foreach (var order in orders)
+                    order.Car = car;
+
+                carOrders.Add(new CarWithOrders
+                {
+                    Car = car,
+                    Orders = orders
+                });
+            }
+
+            // Generuj PDF za pomocą QuestPDF
+            var document = new CustomerReportDocument(customer, carOrders);
+            var pdfBytes = document.GeneratePdf();
+
+            return File(pdfBytes, "application/pdf", $"Raport_{customer.Name}.pdf");
+        }
+
+
+
+
+        //GET: Customers/Details/5
+>>>>>>> 54dcd2ecc6acc825d8f83c067fbe8d639c7b5495
         public async Task<IActionResult> Details(int? id)
         {
             if (id == null)

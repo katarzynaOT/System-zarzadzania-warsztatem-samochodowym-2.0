@@ -6,10 +6,21 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Runtime.ConstrainedExecution;
 using System.Threading.Tasks;
+<<<<<<< HEAD
 using System.Xml.Linq;
 using WorkshopManager.Data;
 using WorkshopManager.Models;
 using WorkshopManager.Services;
+=======
+using WorkshopManager.Data;
+using WorkshopManager.Documents;
+using WorkshopManager.Models;
+using WorkshopManager.Services;
+using QuestPDF.Fluent;
+using QuestPDF.Helpers;
+using QuestPDF.Infrastructure;
+using System.Globalization;
+>>>>>>> 54dcd2ecc6acc825d8f83c067fbe8d639c7b5495
 
 namespace WorkshopManager.Controllers
 {
@@ -268,6 +279,7 @@ namespace WorkshopManager.Controllers
             ServiceArchive archive = new ServiceArchive();
             System.Diagnostics.Debug.WriteLine("Archive for orders invoked");
 
+<<<<<<< HEAD
             //if (SearchName != null && SearchCar != null)
             //{
             //System.Diagnostics.Debug.WriteLine("Archive for orders:" + FromDate + " " + ToDate + " " + SearchName + " " + SearchCar);
@@ -327,6 +339,63 @@ namespace WorkshopManager.Controllers
             }
             archive.SearchResults = filteredOrders;
             //}
+=======
+            if (SearchName != null && SearchCar != null)
+            {
+                System.Diagnostics.Debug.WriteLine("Archive for orders:" + FromDate + " " + ToDate + " " + SearchName + " " + SearchCar);
+                archive.SearchCar = SearchCar;
+                archive.SearchName = SearchName;
+                DateTime from;
+                DateTime.TryParse(FromDate, out from);
+                DateTime to;
+                DateTime.TryParse(ToDate, out to);
+
+                archive.FromDate = from;
+                archive.ToDate = to;
+
+                List<ServiceRecord> filteredOrders = new List<ServiceRecord>();
+                List<ServiceOrder> orders = await _context.ServiceOrders.ToListAsync();
+                foreach (var order in orders)
+                {
+                    System.Diagnostics.Debug.WriteLine("Checking order:" + order.Id);
+
+                    String orderDateString = order.CompletedDate;
+                    DateTime orderDateTime;
+                    System.Diagnostics.Debug.WriteLine("Order completed date" + orderDateString);
+
+                    Car car = await _context.Cars.Where(i => i.Id == order.CarId).FirstAsync();
+                    Customer customer = await _context.Customers.Where(i => i.Id == car.CustomerId).FirstAsync();
+
+                    System.Diagnostics.Debug.WriteLine("Customer Name" + customer.Name + "Car name " + car.Name);
+                    if (customer.Name.Contains(SearchName) || car.Name.Contains(SearchCar))
+                        if (DateTime.TryParse(orderDateString, out orderDateTime))
+                        {
+                            System.Diagnostics.Debug.WriteLine("Order completed date" + orderDateString);
+                            System.Diagnostics.Debug.WriteLine("Date order" + orderDateTime);
+                            System.Diagnostics.Debug.WriteLine("Date From" + from);
+                            System.Diagnostics.Debug.WriteLine("Date to" + to);
+                            if (orderDateTime > from && orderDateTime < to)
+                            {
+                                ServiceRecord record = new ServiceRecord();
+                                record.CarName = car.Name;
+                                record.CustomerName = customer.Name;
+                                record.Id = order.Id;
+                                record.TotalCost = order.Price;
+                                record.Description = order.Description;
+                                if (DateTime.TryParse(orderDateString, out orderDateTime))
+                                    record.CompletedDate = orderDateTime;
+                                filteredOrders.Add(record);
+                                System.Diagnostics.Debug.WriteLine("Appended order to result list:" + order.Id);
+                            }
+                        }
+                }
+                foreach (var record in filteredOrders)
+                {
+                    System.Diagnostics.Debug.WriteLine("Order:" + record.Id + " " + record.Description + " " + record.CarName);
+                }
+                archive.SearchResults = filteredOrders;
+            }
+>>>>>>> 54dcd2ecc6acc825d8f83c067fbe8d639c7b5495
             return View(archive);
         }
 
@@ -349,5 +418,46 @@ namespace WorkshopManager.Controllers
         {
             return _context.ServiceOrders.Any(e => e.Id == id);
         }
+<<<<<<< HEAD
+=======
+
+        [HttpPost]
+        public async Task<IActionResult> GenerateReportPdf(ServiceArchive model)
+        {
+            var query = _context.ServiceOrders
+                .Include(o => o.Car)
+                .ThenInclude(c => c.Customer)
+                .AsQueryable();
+
+            if (!string.IsNullOrEmpty(model.SearchName))
+                query = query.Where(o => o.Car.Customer.Name.Contains(model.SearchName));
+
+            if (!string.IsNullOrEmpty(model.SearchCar))
+                query = query.Where(o => o.Car.Name.Contains(model.SearchCar));
+
+            var results = await query.ToListAsync();
+
+            //if (model.FromDate.HasValue)
+            //{
+            //    results = results.Where(o =>
+            //        DateTime.TryParse(o.CompletedDate, out var parsed) &&
+            //        parsed >= model.FromDate.Value).ToList();
+            //}
+
+            //if (model.ToDate.HasValue)
+            //{
+            //    results = results.Where(o =>
+            //        DateTime.TryParse(o.CompletedDate, out var parsed) &&
+            //        parsed <= model.ToDate.Value).ToList();
+            //}
+
+            var document = new ServiceOrdersReportDocument(results);
+            var pdf = document.GeneratePdf();
+
+            return File(pdf, "application/pdf", "raport.pdf");
+        }
+
+
+>>>>>>> 54dcd2ecc6acc825d8f83c067fbe8d639c7b5495
     }
 }

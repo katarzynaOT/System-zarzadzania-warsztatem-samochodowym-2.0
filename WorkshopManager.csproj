@@ -1,4 +1,8 @@
+<<<<<<< HEAD
 <Project Sdk="Microsoft.NET.Sdk.Web">
+=======
+﻿<Project Sdk="Microsoft.NET.Sdk.Web">
+>>>>>>> 54dcd2ecc6acc825d8f83c067fbe8d639c7b5495
 
   <PropertyGroup>
     <TargetFramework>net8.0</TargetFramework>
@@ -18,6 +22,7 @@
     <None Remove="Views\NewFolder\**" />
   </ItemGroup>
 
+<<<<<<< HEAD
   <ItemGroup>
     <Compile Remove="Program_original.cs" />
     <Compile Remove="Views\Error.cshtml.cs" />
@@ -72,3 +77,24 @@
 	</ItemGroup>
 
 </Project>
+=======
+	<ItemGroup>
+		<PackageReference Include="Microsoft.AspNetCore.Diagnostics.EntityFrameworkCore" Version="8.0.4" />
+		<PackageReference Include="Microsoft.EntityFrameworkCore" Version="8.0.4" />
+		<PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="8.0.4" />
+		<PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="8.0.4">
+		  <PrivateAssets>all</PrivateAssets>
+		  <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+		</PackageReference>
+		<PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="8.0.4">
+			<IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+			<PrivateAssets>all</PrivateAssets>
+		</PackageReference>
+		<PackageReference Include="Microsoft.AspNetCore.Identity.EntityFrameworkCore" Version="8.0.4" />
+		<PackageReference Include="Microsoft.AspNetCore.Identity.UI" Version="8.0.4" />
+		<PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="8.0.4" />
+		<PackageReference Include="QuestPDF" Version="2025.5.1" />
+	</ItemGroup>
+
+</Project>
+>>>>>>> 54dcd2ecc6acc825d8f83c067fbe8d639c7b5495

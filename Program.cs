@@ -4,6 +4,12 @@ using WorkshopManager.Data;
 using WorkshopManager.Models;
 using WorkshopManager.Services;
 
+<<<<<<< HEAD
+=======
+using QuestPDF;
+
+
+>>>>>>> 54dcd2ecc6acc825d8f83c067fbe8d639c7b5495
 var builder = WebApplication.CreateBuilder(args);
 
 builder.Configuration.AddJsonFile("appsettings.json", optional: true, reloadOnChange: true);
@@ -32,6 +38,13 @@ builder.Services.AddIdentity<ApplicationUser, IdentityRole>(options =>
 builder.Services.AddControllersWithViews();
 builder.Services.AddRazorPages();
 
+<<<<<<< HEAD
+=======
+//QuestPDF.Settings.License = LicenseType.Community;
+QuestPDF.Settings.License = QuestPDF.Infrastructure.LicenseType.Community;
+
+
+>>>>>>> 54dcd2ecc6acc825d8f83c067fbe8d639c7b5495
 
 var app = builder.Build();
 
@@ -144,7 +157,20 @@ using (var scope = app.Services.CreateScope())
 
     var services = scope.ServiceProvider;
 
+<<<<<<< HEAD
     SeedData.Initialize(services);
+=======
+    try
+    {
+        SeedData.Initialize(services);
+    }
+    catch (Exception ex)
+    {
+        // Logowanie b³êdów (opcjonalne)
+        var logger = services.GetRequiredService<ILogger<Program>>();
+        logger.LogError(ex, "Wyst¹pi³ b³¹d podczas inicjalizacji bazy danych.");
+    }
+>>>>>>> 54dcd2ecc6acc825d8f83c067fbe8d639c7b5495
 
 }
 

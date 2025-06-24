@@ -12,6 +12,10 @@
         public string Title { get; set; }
 
         public int LaborCost { get; set; }
+<<<<<<< HEAD
         public List<UsedPart> UsedParts { get; set;}
+=======
+        public List<UsedPart> UsedParts { get; set; }
+>>>>>>> 54dcd2ecc6acc825d8f83c067fbe8d639c7b5495
     }
 }

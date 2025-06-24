@@ -7,13 +7,20 @@
     ViewData["Title"] = "Service Orders";
 }
 
+<<<<<<< HEAD
 <center><img src="~/images/serviceorders.jpg" width="1200" /></center>
+=======
+>>>>>>> 54dcd2ecc6acc825d8f83c067fbe8d639c7b5495
 <h1>Current Service Orders</h1>
 
 @if (SignInManager.IsSignedIn(User) && User.IsInRole("Recepcjonista"))
 {
     <p>
+<<<<<<< HEAD
         <a asp-action="Create" class="btn btn-success">Create New</a>
+=======
+        <a asp-action="Create">Create New</a>
+>>>>>>> 54dcd2ecc6acc825d8f83c067fbe8d639c7b5495
     </p>
 }
 

@@ -3,11 +3,19 @@
 @{
     ViewData["Title"] = "Cars Index";
 }
+<<<<<<< HEAD
 <center><img src="~/images/cars.jpg" width="1200" /></center>
 <h1>Cars Registered in Workshop</h1>
 
 <p>
     <a asp-action="Create" class="btn btn-success">Register New Car</a>
+=======
+
+<h1>Cars Registered in Workshop</h1>
+
+<p>
+    <a asp-action="Create">Create New</a>
+>>>>>>> 54dcd2ecc6acc825d8f83c067fbe8d639c7b5495
 </p>
 <table class="table">
     <thead>
@@ -43,6 +51,7 @@
         </tr>
     </thead>
     <tbody>
+<<<<<<< HEAD
 @foreach (var item in Model) {
         <tr>
             <td>
@@ -70,6 +79,36 @@
                 @Html.DisplayFor(modelItem => item.ManufacturedYear)
             </td>
             <td>
+=======
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Customer.Id)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Name)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Description)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Brand)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Model)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.VIN)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.RegistrationPlate)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.ManufacturedYear)
+                </td>
+                <td>
+>>>>>>> 54dcd2ecc6acc825d8f83c067fbe8d639c7b5495
                     @if (!string.IsNullOrEmpty(item.imageUrl))
                     {
                         <img src="@item.imageUrl" width="100" alt="Car photo" />
@@ -79,6 +118,7 @@
                         <p>No photo</p>
                     }
 
+<<<<<<< HEAD
             </td>
             <td>
                 <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
@@ -87,5 +127,15 @@
             </td>
         </tr>
 }
+=======
+                </td>
+                <td>
+                    <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
+                    <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
+                    <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
+                </td>
+            </tr>
+        }
+>>>>>>> 54dcd2ecc6acc825d8f83c067fbe8d639c7b5495
     </tbody>
 </table>
