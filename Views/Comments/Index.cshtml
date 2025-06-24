@@ -7,12 +7,14 @@
     ViewData["Title"] = "Index";
 }
 
+<center><img src="~/images/comments.jpg" width="1200" /></center>
 <h1>All Comments</h1>
 
 @if (SignInManager.IsSignedIn(User))
 {
     <p>
-        <a asp-action="Create">Add New Comment</a>
+        <a asp-action="Create" class="btn btn-success">Add New Comment</a>
+        @* <a asp-action="Create">Add New Comment</a> *@
     </p>
 }
 

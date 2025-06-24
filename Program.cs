@@ -3,6 +3,8 @@ using Microsoft.EntityFrameworkCore;
 using WorkshopManager.Data;
 using WorkshopManager.Models;
 using WorkshopManager.Services;
+using Microsoft.Extensions.DependencyInjection;
+using Swashbuckle.AspNetCore.SwaggerGen;
 
 using QuestPDF;
 
@@ -38,7 +40,7 @@ builder.Services.AddRazorPages();
 //QuestPDF.Settings.License = LicenseType.Community;
 QuestPDF.Settings.License = QuestPDF.Infrastructure.LicenseType.Community;
 
-
+builder.Services.AddSwaggerGen();
 
 var app = builder.Build();
 
@@ -166,6 +168,14 @@ using (var scope = app.Services.CreateScope())
 
 builder.Services.AddAuthentication();
 builder.Services.AddAuthorization();
+
+app.UseSwagger();
+app.UseSwaggerUI(c =>
+{
+    c.SwaggerEndpoint("/swagger/v1/swagger.json", "My API V1");
+});
+
+
 
 app.UseHttpsRedirection();
 app.UseStaticFiles();
