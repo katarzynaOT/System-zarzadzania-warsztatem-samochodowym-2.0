@@ -43,6 +43,7 @@ Role: Admin, Mechanik, Recepcjonista.
 - SQL Server (LocalDB)
 - QuestPDF (raporty PDF)
 - C#
+- Testy w NUnit
 
 ---
 
